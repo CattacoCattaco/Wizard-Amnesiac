@@ -1,7 +1,126 @@
+@tool
+class_name Symbol
 extends Node2D
 
+enum SymbolType {
+	HOPE,
+	STABILITY,
+	LOVE,
+	LOSS,
+	ENTROPY,
+	CURIOSITY,
+}
 
+@export var size: int = 100:
+	set(value):
+		size = value
+		queue_redraw()
+
+@export var is_square: bool = true:
+	set(value):
+		is_square = value
+		queue_redraw()
+
+@export var symbol: SymbolType = SymbolType.HOPE:
+	set(value):
+		symbol = value
+		queue_redraw()
+
+@export var update: bool = false:
+	set(value):
+		update = false
+		queue_redraw()
+
+var symbol_lines: Line2D
+
+
+func _ready() -> void:
+	symbol_lines = Line2D.new()
+	add_child(symbol_lines)
+	
+	symbol_lines.default_color = Color.BLACK
+	symbol_lines.width = 5
+	
+	symbol_lines.begin_cap_mode = Line2D.LINE_CAP_ROUND
+	symbol_lines.end_cap_mode = Line2D.LINE_CAP_ROUND
+	symbol_lines.joint_mode = Line2D.LINE_JOINT_ROUND
 
 
 func _draw() -> void:
-	draw_circle(Vector2(0, 0), 50, Color.BLACK, false, 5)
+	if is_square:
+		var corners: PackedVector2Array
+		
+		if symbol == SymbolType.STABILITY:
+			corners = PackedVector2Array([
+				Vector2(-size / 3.0, -size / 2.0),
+				Vector2(-size / 3.0, size / 2.0),
+				Vector2(size / 3.0, size/ 2.0),
+				Vector2(size / 3.0, -size / 2.0),
+				Vector2(-size / 3.0, -size / 2.0),
+			])
+		else:
+			corners = PackedVector2Array([
+				Vector2(-size / 2.0, -size / 2.0),
+				Vector2(-size / 2.0, size / 2.0),
+				Vector2(size / 2.0, size/ 2.0),
+				Vector2(size / 2.0, -size / 2.0),
+				Vector2(-size / 2.0, -size / 2.0),
+			])
+		
+		draw_polyline(corners, Color.BLACK, 5)
+	else:
+		draw_circle(Vector2(0, 0), size / 2.0, Color.BLACK, false, 5)
+	
+	draw_symbol()
+
+
+func draw_symbol() -> void:
+	match symbol:
+		SymbolType.HOPE:
+			draw_hope()
+		SymbolType.STABILITY:
+			draw_stability()
+
+
+func draw_hope() -> void:
+	var vertices: PackedVector2Array
+	if is_square:
+		vertices = PackedVector2Array([
+			Vector2(-size / 2.0, size / 2.0),
+			Vector2(0, 0),
+			Vector2(size / 2.0, size / 2.0),
+			Vector2(size / 2.0 * 0.6, -size / 2.0 * 0.6),
+			Vector2(size / 2.0 * 0.2, -size / 2.0 * 0.2),
+		])
+	else:
+		vertices = PackedVector2Array([
+			Vector2(-size / 2.0 * cos(PI / 4), size / 2.0 * sin(PI / 4)),
+			Vector2(0, 0),
+			Vector2(size / 2.0 * cos(PI / 4), size / 2.0 * sin(PI / 4)),
+			Vector2(size / 2.0 * cos(PI / 4), -size / 2.0 * sin(PI / 4)),
+			Vector2(size / 2.0 * 0.3, -size / 2.0 * 0.3),
+		])
+	
+	symbol_lines.points = vertices
+
+
+
+func draw_stability() -> void:
+	var vertices: PackedVector2Array
+	if is_square:
+		vertices = PackedVector2Array([
+			Vector2(-size / 3.0, -size / 2.0),
+			Vector2(size / 3.0, size / 6.0),
+			Vector2(size / 6.0, 0),
+			Vector2(-size / 12.0, size / 4.0),
+		])
+	else:
+		vertices = PackedVector2Array([
+			Vector2(-size / 2.0 * cos(PI / 4), size / 2.0 * sin(PI / 4)),
+			Vector2(0, 0),
+			Vector2(size / 2.0 * cos(PI / 4), size / 2.0 * sin(PI / 4)),
+			Vector2(size / 2.0 * cos(PI / 4), -size / 2.0 * sin(PI / 4)),
+			Vector2(size / 2.0 * 0.3, -size / 2.0 * 0.3),
+		])
+	
+	symbol_lines.points = vertices
