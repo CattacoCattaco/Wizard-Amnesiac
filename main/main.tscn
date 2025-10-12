@@ -7,6 +7,6 @@
 [node name="Symbol" type="Node2D" parent="."]
 script = ExtResource("1_53q0u")
 size = 200
-symbol = 1
+symbol = 5
 
 [node name="Camera2D" type="Camera2D" parent="."]

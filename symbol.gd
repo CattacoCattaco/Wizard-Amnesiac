@@ -80,6 +80,14 @@ func draw_symbol() -> void:
 			draw_hope()
 		SymbolType.STABILITY:
 			draw_stability()
+		SymbolType.LOVE:
+			draw_love()
+		SymbolType.LOSS:
+			draw_loss()
+		SymbolType.ENTROPY:
+			draw_entropy()
+		SymbolType.CURIOSITY:
+			draw_curiosity()
 
 
 func draw_hope() -> void:
@@ -104,7 +112,6 @@ func draw_hope() -> void:
 	symbol_lines.points = vertices
 
 
-
 func draw_stability() -> void:
 	var vertices: PackedVector2Array
 	if is_square:
@@ -113,14 +120,110 @@ func draw_stability() -> void:
 			Vector2(size / 3.0, size / 6.0),
 			Vector2(size / 6.0, 0),
 			Vector2(-size / 12.0, size / 4.0),
+			Vector2(size / 6.0, size / 2.0),
+			Vector2(-size / 3.0, 0),
+			Vector2(-size / 12.0, -size / 4.0),
+		])
+	else:
+		vertices = PackedVector2Array([
+			Vector2(size / 2.0 * (1 + sqrt(7)) / 4.0, -size / 2.0 * (-(1 + sqrt(7)) / 4.0 + 0.5)),
+			Vector2(size / 2.0 * (1 - sqrt(7)) / 4.0, -size / 2.0 * (-(1 - sqrt(7)) / 4.0 + 0.5)),
+			Vector2(size / 4.0, 0),
+			Vector2(0, size / 4.0),
+			Vector2(size / 2.0 * -(1 - sqrt(7)) / 4.0, -size / 2.0 * ((1 - sqrt(7)) / 4.0 - 0.5)),
+			Vector2(-size / 4.0, 0),
+			Vector2(0, -size / 4.0),
+		])
+	
+	symbol_lines.points = vertices
+
+
+func draw_love() -> void:
+	var vertices: PackedVector2Array
+	if is_square:
+		vertices = PackedVector2Array([
+			Vector2(-size / 2.0, -size / 2.0),
+			Vector2(0, -size / 3.0),
+			Vector2(-size / 3.0, 0),
+			Vector2(size / 12.0, size / 6.0),
+			Vector2(-size / 4.0, size / 2.0),
+			Vector2(size / 2.0, -size / 4.0),
+		])
+	else:
+		vertices = PackedVector2Array([
+			Vector2(size / 2.0 * -cos(atan(-5 / 3.0)), size / 2.0 * sin(atan(-5 / 3.0))),
+			Vector2(size / 12.0, -size / 3.0),
+			Vector2(-size / 4.0, 0),
+			Vector2(size / 12.0, size / 12.0),
+			Vector2(size / 2.0 * (1 - sqrt(17)) / 6, -size / 2.0 * ((1 - sqrt(17)) / 6 - 1 / 3.0)),
+			Vector2(size / 2.0 * (1 + sqrt(17)) / 6, -size / 2.0 * ((1 + sqrt(17)) / 6 - 1 / 3.0)),
+		])
+	
+	symbol_lines.points = vertices
+
+
+func draw_loss() -> void:
+	var vertices: PackedVector2Array
+	if is_square:
+		vertices = PackedVector2Array([
+			Vector2(-size / 2.0, size / 2.0),
+			Vector2(-size / 6.0, -size / 6.0),
+			Vector2(size / 4.0, size / 4.0),
+			Vector2(-size / 6.0, -size / 6.0),
+			Vector2(0, -size / 2.0),
+			Vector2(size / 4.0, -size / 4.0),
+			Vector2(size / 2.0, -size / 2.0),
+		])
+	else:
+		vertices = PackedVector2Array([
+			Vector2(size / 2.0 * (-20 - 8 * sqrt(2)) / (51),
+					-size / 2.0 * (4 * (-20 - 8 * sqrt(2)) / 51 + 5 / 3.0)),
+			Vector2(-size / 6.0, -size / 6.0),
+			Vector2(size / 6.0, size / 6.0),
+			Vector2(-size / 6.0, -size / 6.0),
+			Vector2(size / 2.0 * (-20 + 8 * sqrt(2)) / (51),
+					-size / 2.0 * (4 * (-20 + 8 * sqrt(2)) / 51 + 5 / 3.0)),
+			Vector2(size / 6.0, -size / 4.0),
+			Vector2(size / 2.0 * (-1 + sqrt(71)) / 12,
+					-size / 2.0 * ((-1 + sqrt(71)) / 12 + 1 / 6.0)),
+		])
+	
+	symbol_lines.points = vertices
+
+
+func draw_entropy() -> void:
+	var vertices: PackedVector2Array
+	if is_square:
+		vertices = PackedVector2Array([
+			Vector2(-size / 2.0, size / 2.0),
+			Vector2(-size / 4.0, size / 4.0),
+			Vector2(size / 4.0, size / 4.0),
+			Vector2(-size / 4.0, -size / 4.0),
+			Vector2(size / 4.0, -size / 4.0),
+			Vector2(size / 2.0, -size / 2.0),
 		])
 	else:
 		vertices = PackedVector2Array([
 			Vector2(-size / 2.0 * cos(PI / 4), size / 2.0 * sin(PI / 4)),
-			Vector2(0, 0),
-			Vector2(size / 2.0 * cos(PI / 4), size / 2.0 * sin(PI / 4)),
+			Vector2(-size / 6.0, size / 6.0),
+			Vector2(size / 6.0, size / 6.0),
+			Vector2(-size / 6.0, -size / 6.0),
+			Vector2(size / 6.0, -size / 6.0),
 			Vector2(size / 2.0 * cos(PI / 4), -size / 2.0 * sin(PI / 4)),
-			Vector2(size / 2.0 * 0.3, -size / 2.0 * 0.3),
 		])
+	
+	symbol_lines.points = vertices
+
+
+func draw_curiosity() -> void:
+	var vertices := PackedVector2Array([
+		Vector2(0, size / 2.0),
+		Vector2(0, size / 4.0),
+		Vector2(size / 4.0, 0),
+		Vector2(0, -size / 4.0),
+		Vector2(-size / 4.0, 0),
+		Vector2(0, -size / 4.0),
+		Vector2(0, -size / 2.0),
+	])
 	
 	symbol_lines.points = vertices
