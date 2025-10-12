@@ -1,27 +1,13 @@
 @tool
-class_name Symbol
+class_name SymbolDisplay
 extends Node2D
-
-enum SymbolType {
-	HOPE,
-	STABILITY,
-	LOVE,
-	LOSS,
-	ENTROPY,
-	CURIOSITY,
-}
 
 @export var size: int = 100:
 	set(value):
 		size = value
 		queue_redraw()
 
-@export var is_square: bool = true:
-	set(value):
-		is_square = value
-		queue_redraw()
-
-@export var symbol: SymbolType = SymbolType.HOPE:
+@export var symbol: SymbolData:
 	set(value):
 		symbol = value
 		queue_redraw()
@@ -32,6 +18,8 @@ enum SymbolType {
 		queue_redraw()
 
 var symbol_lines: Line2D
+
+var child_symbols: Array[SymbolDisplay]
 
 
 func _ready() -> void:
@@ -47,52 +35,58 @@ func _ready() -> void:
 
 
 func _draw() -> void:
-	if is_square:
-		var corners: PackedVector2Array
-		
-		if symbol == SymbolType.STABILITY:
-			corners = PackedVector2Array([
-				Vector2(-size / 3.0, -size / 2.0),
-				Vector2(-size / 3.0, size / 2.0),
-				Vector2(size / 3.0, size/ 2.0),
-				Vector2(size / 3.0, -size / 2.0),
-				Vector2(-size / 3.0, -size / 2.0),
-			])
-		else:
-			corners = PackedVector2Array([
-				Vector2(-size / 2.0, -size / 2.0),
-				Vector2(-size / 2.0, size / 2.0),
-				Vector2(size / 2.0, size/ 2.0),
-				Vector2(size / 2.0, -size / 2.0),
-				Vector2(-size / 2.0, -size / 2.0),
-			])
-		
-		draw_polyline(corners, Color.BLACK, 5)
-	else:
-		draw_circle(Vector2(0, 0), size / 2.0, Color.BLACK, false, 5)
+	if not symbol:
+		return
+	
+	for symbol_display in child_symbols:
+		symbol_display.queue_free()
+	
+	child_symbols = []
 	
 	draw_symbol()
+	
+	match symbol.border_type:
+		SymbolData.BorderType.SQUARE:
+			draw_square_border()
+		SymbolData.BorderType.CIRCLE:
+			draw_circle(Vector2(0, 0), size / 2.0, Color.BLACK, false, 5)
+
+
+func draw_square_border() -> void:
+	var corners: PackedVector2Array
+	
+	corners = PackedVector2Array([
+		Vector2(-size / 2.0 * symbol.get_width(), -size / 2.0),
+		Vector2(-size / 2.0 * symbol.get_width(), size / 2.0),
+		Vector2(size / 2.0 * symbol.get_width(), size/ 2.0),
+		Vector2(size / 2.0 * symbol.get_width(), -size / 2.0),
+		Vector2(-size / 2.0 * symbol.get_width(), -size / 2.0),
+	])
+	
+	draw_polyline(corners, Color.BLACK, 5)
 
 
 func draw_symbol() -> void:
-	match symbol:
-		SymbolType.HOPE:
+	match symbol.symbol:
+		SymbolData.SymbolType.HOPE:
 			draw_hope()
-		SymbolType.STABILITY:
+		SymbolData.SymbolType.STABILITY:
 			draw_stability()
-		SymbolType.LOVE:
+		SymbolData.SymbolType.LOVE:
 			draw_love()
-		SymbolType.LOSS:
+		SymbolData.SymbolType.LOSS:
 			draw_loss()
-		SymbolType.ENTROPY:
+		SymbolData.SymbolType.ENTROPY:
 			draw_entropy()
-		SymbolType.CURIOSITY:
+		SymbolData.SymbolType.CURIOSITY:
 			draw_curiosity()
+		SymbolData.SymbolType.MULTISYMBOL:
+			draw_multisymbol()
 
 
 func draw_hope() -> void:
 	var vertices: PackedVector2Array
-	if is_square:
+	if symbol.is_square():
 		vertices = PackedVector2Array([
 			Vector2(-size / 2.0, size / 2.0),
 			Vector2(0, 0),
@@ -114,7 +108,7 @@ func draw_hope() -> void:
 
 func draw_stability() -> void:
 	var vertices: PackedVector2Array
-	if is_square:
+	if symbol.is_square():
 		vertices = PackedVector2Array([
 			Vector2(-size / 3.0, -size / 2.0),
 			Vector2(size / 3.0, size / 6.0),
@@ -140,7 +134,7 @@ func draw_stability() -> void:
 
 func draw_love() -> void:
 	var vertices: PackedVector2Array
-	if is_square:
+	if symbol.is_square():
 		vertices = PackedVector2Array([
 			Vector2(-size / 2.0, -size / 2.0),
 			Vector2(0, -size / 3.0),
@@ -164,7 +158,7 @@ func draw_love() -> void:
 
 func draw_loss() -> void:
 	var vertices: PackedVector2Array
-	if is_square:
+	if symbol.is_square():
 		vertices = PackedVector2Array([
 			Vector2(-size / 2.0, size / 2.0),
 			Vector2(-size / 6.0, -size / 6.0),
@@ -193,7 +187,7 @@ func draw_loss() -> void:
 
 func draw_entropy() -> void:
 	var vertices: PackedVector2Array
-	if is_square:
+	if symbol.is_square():
 		vertices = PackedVector2Array([
 			Vector2(-size / 2.0, size / 2.0),
 			Vector2(-size / 4.0, size / 4.0),
@@ -227,3 +221,20 @@ func draw_curiosity() -> void:
 	])
 	
 	symbol_lines.points = vertices
+
+
+func draw_multisymbol() -> void:
+	symbol_lines.points = PackedVector2Array([])
+	
+	var progress: float = -symbol.get_width() * size / 2.0
+	for symbol_data in symbol.child_symbols:
+		var child_symbol := SymbolDisplay.new()
+		child_symbol.size = size
+		child_symbol.symbol = symbol_data
+		
+		add_child(child_symbol)
+		child_symbols.append(child_symbol)
+		
+		var offset: float = symbol_data.get_width() * child_symbol.size / 2.0
+		child_symbol.position = Vector2(progress + offset, 0)
+		progress += symbol_data.get_width() * child_symbol.size

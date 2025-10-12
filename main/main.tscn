@@ -1,12 +1,31 @@
-[gd_scene load_steps=2 format=3 uid="uid://cdly6i4lxnov2"]
+[gd_scene load_steps=6 format=3 uid="uid://cdly6i4lxnov2"]
 
-[ext_resource type="Script" uid="uid://55r0wtsd6gs6" path="res://symbol.gd" id="1_53q0u"]
+[ext_resource type="Script" uid="uid://55r0wtsd6gs6" path="res://main/symbol/symbol_display.gd" id="1_53q0u"]
+[ext_resource type="Script" uid="uid://vuytrsscfx6d" path="res://main/symbol/symbol_data.gd" id="2_pjrb6"]
+
+[sub_resource type="Resource" id="Resource_xwkvk"]
+script = ExtResource("2_pjrb6")
+border_type = 1
+symbol = 4
+metadata/_custom_type_script = "uid://vuytrsscfx6d"
+
+[sub_resource type="Resource" id="Resource_c651c"]
+script = ExtResource("2_pjrb6")
+border_type = 1
+symbol = 1
+metadata/_custom_type_script = "uid://vuytrsscfx6d"
+
+[sub_resource type="Resource" id="Resource_pjrb6"]
+script = ExtResource("2_pjrb6")
+symbol = 6
+child_symbols = Array[ExtResource("2_pjrb6")]([SubResource("Resource_xwkvk"), SubResource("Resource_c651c")])
+metadata/_custom_type_script = "uid://vuytrsscfx6d"
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Symbol" type="Node2D" parent="."]
 script = ExtResource("1_53q0u")
 size = 200
-symbol = 5
+symbol = SubResource("Resource_pjrb6")
 
 [node name="Camera2D" type="Camera2D" parent="."]
