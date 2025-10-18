@@ -23,9 +23,14 @@ metadata/_custom_type_script = "uid://vuytrsscfx6d"
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Symbol" type="Node2D" parent="."]
+[node name="Symbol" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 150.0
+offset_bottom = 100.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
 script = ExtResource("1_53q0u")
-size = 200
 symbol = SubResource("Resource_pjrb6")
 
 [node name="Camera2D" type="Camera2D" parent="."]

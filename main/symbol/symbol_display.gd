@@ -1,10 +1,10 @@
 @tool
 class_name SymbolDisplay
-extends Node2D
+extends Control
 
-@export var size: int = 100:
+@export var symbol_height: int = 100:
 	set(value):
-		size = value
+		symbol_height = value
 		queue_redraw()
 
 @export var symbol: SymbolData:
@@ -49,18 +49,19 @@ func _draw() -> void:
 		SymbolData.BorderType.SQUARE:
 			draw_square_border()
 		SymbolData.BorderType.CIRCLE:
-			draw_circle(Vector2(0, 0), size / 2.0, Color.BLACK, false, 5)
+			var half_height: float = symbol_height / 2.0
+			draw_circle(Vector2(half_height, half_height), half_height, Color.BLACK, false, 5)
 
 
 func draw_square_border() -> void:
 	var corners: PackedVector2Array
 	
 	corners = PackedVector2Array([
-		Vector2(-size / 2.0 * symbol.get_width(), -size / 2.0),
-		Vector2(-size / 2.0 * symbol.get_width(), size / 2.0),
-		Vector2(size / 2.0 * symbol.get_width(), size/ 2.0),
-		Vector2(size / 2.0 * symbol.get_width(), -size / 2.0),
-		Vector2(-size / 2.0 * symbol.get_width(), -size / 2.0),
+		Vector2(0, 0),
+		Vector2(0 * symbol.get_width(), symbol_height),
+		Vector2(symbol_height * symbol.get_width(), symbol_height),
+		Vector2(symbol_height * symbol.get_width(), 0),
+		Vector2(0 * symbol.get_width(), 0),
 	])
 	
 	draw_polyline(corners, Color.BLACK, 5)
@@ -88,20 +89,23 @@ func draw_hope() -> void:
 	var vertices: PackedVector2Array
 	if symbol.is_square():
 		vertices = PackedVector2Array([
-			Vector2(-size / 2.0, size / 2.0),
+			Vector2(-symbol_height / 2.0, symbol_height / 2.0),
 			Vector2(0, 0),
-			Vector2(size / 2.0, size / 2.0),
-			Vector2(size / 2.0 * 0.6, -size / 2.0 * 0.6),
-			Vector2(size / 2.0 * 0.2, -size / 2.0 * 0.2),
+			Vector2(symbol_height / 2.0, symbol_height / 2.0),
+			Vector2(symbol_height / 2.0 * 0.6, -symbol_height / 2.0 * 0.6),
+			Vector2(symbol_height / 2.0 * 0.2, -symbol_height / 2.0 * 0.2),
 		])
 	else:
 		vertices = PackedVector2Array([
-			Vector2(-size / 2.0 * cos(PI / 4), size / 2.0 * sin(PI / 4)),
+			Vector2(-symbol_height / 2.0 * cos(PI / 4), symbol_height / 2.0 * sin(PI / 4)),
 			Vector2(0, 0),
-			Vector2(size / 2.0 * cos(PI / 4), size / 2.0 * sin(PI / 4)),
-			Vector2(size / 2.0 * cos(PI / 4), -size / 2.0 * sin(PI / 4)),
-			Vector2(size / 2.0 * 0.3, -size / 2.0 * 0.3),
+			Vector2(symbol_height / 2.0 * cos(PI / 4), symbol_height / 2.0 * sin(PI / 4)),
+			Vector2(symbol_height / 2.0 * cos(PI / 4), -symbol_height / 2.0 * sin(PI / 4)),
+			Vector2(symbol_height / 2.0 * 0.3, -symbol_height / 2.0 * 0.3),
 		])
+	
+	for i in len(vertices):
+		vertices[i] = vertices[i] + Vector2(symbol_height / 2.0, symbol_height / 2.0)
 	
 	symbol_lines.points = vertices
 
@@ -110,24 +114,27 @@ func draw_stability() -> void:
 	var vertices: PackedVector2Array
 	if symbol.is_square():
 		vertices = PackedVector2Array([
-			Vector2(-size / 3.0, -size / 2.0),
-			Vector2(size / 3.0, size / 6.0),
-			Vector2(size / 6.0, 0),
-			Vector2(-size / 12.0, size / 4.0),
-			Vector2(size / 6.0, size / 2.0),
-			Vector2(-size / 3.0, 0),
-			Vector2(-size / 12.0, -size / 4.0),
+			Vector2(0, 0),
+			Vector2(symbol_height * 2 / 3.0, symbol_height * 2 / 3.0),
+			Vector2(symbol_height / 2.0, symbol_height / 2.0),
+			Vector2(symbol_height / 4.0, symbol_height * 3 / 4.0),
+			Vector2(symbol_height / 2.0, symbol_height),
+			Vector2(0, symbol_height / 2.0),
+			Vector2(symbol_height / 4.0, symbol_height / 4.0),
 		])
 	else:
 		vertices = PackedVector2Array([
-			Vector2(size / 2.0 * (1 + sqrt(7)) / 4.0, -size / 2.0 * (-(1 + sqrt(7)) / 4.0 + 0.5)),
-			Vector2(size / 2.0 * (1 - sqrt(7)) / 4.0, -size / 2.0 * (-(1 - sqrt(7)) / 4.0 + 0.5)),
-			Vector2(size / 4.0, 0),
-			Vector2(0, size / 4.0),
-			Vector2(size / 2.0 * -(1 - sqrt(7)) / 4.0, -size / 2.0 * ((1 - sqrt(7)) / 4.0 - 0.5)),
-			Vector2(-size / 4.0, 0),
-			Vector2(0, -size / 4.0),
+			Vector2(symbol_height / 2.0 * (1 + sqrt(7)) / 4.0, -symbol_height / 2.0 * (-(1 + sqrt(7)) / 4.0 + 0.5)),
+			Vector2(symbol_height / 2.0 * (1 - sqrt(7)) / 4.0, -symbol_height / 2.0 * (-(1 - sqrt(7)) / 4.0 + 0.5)),
+			Vector2(symbol_height / 4.0, 0),
+			Vector2(0, symbol_height / 4.0),
+			Vector2(symbol_height / 2.0 * -(1 - sqrt(7)) / 4.0, -symbol_height / 2.0 * ((1 - sqrt(7)) / 4.0 - 0.5)),
+			Vector2(-symbol_height / 4.0, 0),
+			Vector2(0, -symbol_height / 4.0),
 		])
+		
+		for i in len(vertices):
+			vertices[i] = vertices[i] + Vector2(symbol_height / 2.0, symbol_height / 2.0)
 	
 	symbol_lines.points = vertices
 
@@ -136,22 +143,25 @@ func draw_love() -> void:
 	var vertices: PackedVector2Array
 	if symbol.is_square():
 		vertices = PackedVector2Array([
-			Vector2(-size / 2.0, -size / 2.0),
-			Vector2(0, -size / 3.0),
-			Vector2(-size / 3.0, 0),
-			Vector2(size / 12.0, size / 6.0),
-			Vector2(-size / 4.0, size / 2.0),
-			Vector2(size / 2.0, -size / 4.0),
+			Vector2(-symbol_height / 2.0, -symbol_height / 2.0),
+			Vector2(0, -symbol_height / 3.0),
+			Vector2(-symbol_height / 3.0, 0),
+			Vector2(symbol_height / 12.0, symbol_height / 6.0),
+			Vector2(-symbol_height / 4.0, symbol_height / 2.0),
+			Vector2(symbol_height / 2.0, -symbol_height / 4.0),
 		])
 	else:
 		vertices = PackedVector2Array([
-			Vector2(size / 2.0 * -cos(atan(-5 / 3.0)), size / 2.0 * sin(atan(-5 / 3.0))),
-			Vector2(size / 12.0, -size / 3.0),
-			Vector2(-size / 4.0, 0),
-			Vector2(size / 12.0, size / 12.0),
-			Vector2(size / 2.0 * (1 - sqrt(17)) / 6, -size / 2.0 * ((1 - sqrt(17)) / 6 - 1 / 3.0)),
-			Vector2(size / 2.0 * (1 + sqrt(17)) / 6, -size / 2.0 * ((1 + sqrt(17)) / 6 - 1 / 3.0)),
+			Vector2(symbol_height / 2.0 * -cos(atan(-5 / 3.0)), symbol_height / 2.0 * sin(atan(-5 / 3.0))),
+			Vector2(symbol_height / 12.0, -symbol_height / 3.0),
+			Vector2(-symbol_height / 4.0, 0),
+			Vector2(symbol_height / 12.0, symbol_height / 12.0),
+			Vector2(symbol_height / 2.0 * (1 - sqrt(17)) / 6, -symbol_height / 2.0 * ((1 - sqrt(17)) / 6 - 1 / 3.0)),
+			Vector2(symbol_height / 2.0 * (1 + sqrt(17)) / 6, -symbol_height / 2.0 * ((1 + sqrt(17)) / 6 - 1 / 3.0)),
 		])
+	
+	for i in len(vertices):
+		vertices[i] = vertices[i] + Vector2(symbol_height / 2.0, symbol_height / 2.0)
 	
 	symbol_lines.points = vertices
 
@@ -160,27 +170,30 @@ func draw_loss() -> void:
 	var vertices: PackedVector2Array
 	if symbol.is_square():
 		vertices = PackedVector2Array([
-			Vector2(-size / 2.0, size / 2.0),
-			Vector2(-size / 6.0, -size / 6.0),
-			Vector2(size / 4.0, size / 4.0),
-			Vector2(-size / 6.0, -size / 6.0),
-			Vector2(0, -size / 2.0),
-			Vector2(size / 4.0, -size / 4.0),
-			Vector2(size / 2.0, -size / 2.0),
+			Vector2(-symbol_height / 2.0, symbol_height / 2.0),
+			Vector2(-symbol_height / 6.0, -symbol_height / 6.0),
+			Vector2(symbol_height / 4.0, symbol_height / 4.0),
+			Vector2(-symbol_height / 6.0, -symbol_height / 6.0),
+			Vector2(0, -symbol_height / 2.0),
+			Vector2(symbol_height / 4.0, -symbol_height / 4.0),
+			Vector2(symbol_height / 2.0, -symbol_height / 2.0),
 		])
 	else:
 		vertices = PackedVector2Array([
-			Vector2(size / 2.0 * (-20 - 8 * sqrt(2)) / (51),
-					-size / 2.0 * (4 * (-20 - 8 * sqrt(2)) / 51 + 5 / 3.0)),
-			Vector2(-size / 6.0, -size / 6.0),
-			Vector2(size / 6.0, size / 6.0),
-			Vector2(-size / 6.0, -size / 6.0),
-			Vector2(size / 2.0 * (-20 + 8 * sqrt(2)) / (51),
-					-size / 2.0 * (4 * (-20 + 8 * sqrt(2)) / 51 + 5 / 3.0)),
-			Vector2(size / 6.0, -size / 4.0),
-			Vector2(size / 2.0 * (-1 + sqrt(71)) / 12,
-					-size / 2.0 * ((-1 + sqrt(71)) / 12 + 1 / 6.0)),
+			Vector2(symbol_height / 2.0 * (-20 - 8 * sqrt(2)) / (51),
+					-symbol_height / 2.0 * (4 * (-20 - 8 * sqrt(2)) / 51 + 5 / 3.0)),
+			Vector2(-symbol_height / 6.0, -symbol_height / 6.0),
+			Vector2(symbol_height / 6.0, symbol_height / 6.0),
+			Vector2(-symbol_height / 6.0, -symbol_height / 6.0),
+			Vector2(symbol_height / 2.0 * (-20 + 8 * sqrt(2)) / (51),
+					-symbol_height / 2.0 * (4 * (-20 + 8 * sqrt(2)) / 51 + 5 / 3.0)),
+			Vector2(symbol_height / 6.0, -symbol_height / 4.0),
+			Vector2(symbol_height / 2.0 * (-1 + sqrt(71)) / 12,
+					-symbol_height / 2.0 * ((-1 + sqrt(71)) / 12 + 1 / 6.0)),
 		])
+	
+	for i in len(vertices):
+		vertices[i] = vertices[i] + Vector2(symbol_height / 2.0, symbol_height / 2.0)
 	
 	symbol_lines.points = vertices
 
@@ -189,36 +202,54 @@ func draw_entropy() -> void:
 	var vertices: PackedVector2Array
 	if symbol.is_square():
 		vertices = PackedVector2Array([
-			Vector2(-size / 2.0, size / 2.0),
-			Vector2(-size / 4.0, size / 4.0),
-			Vector2(size / 4.0, size / 4.0),
-			Vector2(-size / 4.0, -size / 4.0),
-			Vector2(size / 4.0, -size / 4.0),
-			Vector2(size / 2.0, -size / 2.0),
+			Vector2(-symbol_height / 2.0, symbol_height / 2.0),
+			Vector2(-symbol_height / 4.0, symbol_height / 4.0),
+			Vector2(symbol_height / 4.0, symbol_height / 4.0),
+			Vector2(-symbol_height / 4.0, -symbol_height / 4.0),
+			Vector2(symbol_height / 4.0, -symbol_height / 4.0),
+			Vector2(symbol_height / 2.0, -symbol_height / 2.0),
 		])
 	else:
 		vertices = PackedVector2Array([
-			Vector2(-size / 2.0 * cos(PI / 4), size / 2.0 * sin(PI / 4)),
-			Vector2(-size / 6.0, size / 6.0),
-			Vector2(size / 6.0, size / 6.0),
-			Vector2(-size / 6.0, -size / 6.0),
-			Vector2(size / 6.0, -size / 6.0),
-			Vector2(size / 2.0 * cos(PI / 4), -size / 2.0 * sin(PI / 4)),
+			Vector2(-symbol_height / 2.0 * cos(PI / 4), symbol_height / 2.0 * sin(PI / 4)),
+			Vector2(-symbol_height / 6.0, symbol_height / 6.0),
+			Vector2(symbol_height / 6.0, symbol_height / 6.0),
+			Vector2(-symbol_height / 6.0, -symbol_height / 6.0),
+			Vector2(symbol_height / 6.0, -symbol_height / 6.0),
+			Vector2(symbol_height / 2.0 * cos(PI / 4), -symbol_height / 2.0 * sin(PI / 4)),
 		])
+	
+	for i in len(vertices):
+		vertices[i] = vertices[i] + Vector2(symbol_height / 2.0, symbol_height / 2.0)
 	
 	symbol_lines.points = vertices
 
 
 func draw_curiosity() -> void:
-	var vertices := PackedVector2Array([
-		Vector2(0, size / 2.0),
-		Vector2(0, size / 4.0),
-		Vector2(size / 4.0, 0),
-		Vector2(0, -size / 4.0),
-		Vector2(-size / 4.0, 0),
-		Vector2(0, -size / 4.0),
-		Vector2(0, -size / 2.0),
-	])
+	var vertices: PackedVector2Array
+	
+	if symbol.is_square():
+		vertices = PackedVector2Array([
+			Vector2(symbol_height / 4.0, symbol_height),
+			Vector2(symbol_height / 4.0, symbol_height * 3 / 4.0),
+			Vector2(symbol_height / 2.0, symbol_height / 2.0),
+			Vector2(symbol_height / 4.0, symbol_height / 4.0),
+			Vector2(0, symbol_height / 2.0),
+			Vector2(symbol_height / 4.0, symbol_height / 4.0),
+			Vector2(symbol_height / 4.0, 0),
+		])
+	else:
+		vertices = PackedVector2Array([
+			Vector2(0, symbol_height / 2.0),
+			Vector2(0, symbol_height / 4.0),
+			Vector2(symbol_height / 4.0, 0),
+			Vector2(0, -symbol_height / 4.0),
+			Vector2(-symbol_height / 4.0, 0),
+			Vector2(0, -symbol_height / 4.0),
+			Vector2(0, -symbol_height / 2.0),
+		])
+		for i in len(vertices):
+			vertices[i] = vertices[i] + Vector2(symbol_height / 2.0, symbol_height / 2.0)
 	
 	symbol_lines.points = vertices
 
@@ -226,15 +257,18 @@ func draw_curiosity() -> void:
 func draw_multisymbol() -> void:
 	symbol_lines.points = PackedVector2Array([])
 	
-	var progress: float = -symbol.get_width() * size / 2.0
+	var progress: float = 0
 	for symbol_data in symbol.child_symbols:
 		var child_symbol := SymbolDisplay.new()
-		child_symbol.size = size
+		child_symbol.symbol_height = symbol_height
 		child_symbol.symbol = symbol_data
 		
 		add_child(child_symbol)
 		child_symbols.append(child_symbol)
 		
-		var offset: float = symbol_data.get_width() * child_symbol.size / 2.0
-		child_symbol.position = Vector2(progress + offset, 0)
-		progress += symbol_data.get_width() * child_symbol.size
+		child_symbol.position = Vector2(progress, 0)
+		progress += symbol_data.get_width() * child_symbol.symbol_height
+
+
+func _get_minimum_size():
+	return Vector2(symbol.get_width() * symbol_height, symbol_height)
