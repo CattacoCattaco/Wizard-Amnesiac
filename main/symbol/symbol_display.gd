@@ -2,6 +2,14 @@
 class_name SymbolDisplay
 extends Control
 
+signal pressed()
+
+enum State {
+	NORMAL,
+	HOVERED,
+	PRESSED,
+}
+
 @export var symbol_height: int = 100:
 	set(value):
 		symbol_height = value
@@ -17,10 +25,21 @@ extends Control
 		update = false
 		queue_redraw()
 
+@export var bg_color: Color:
+	set(value):
+		bg_color = value
+		queue_redraw()
+
+@export var is_button: bool
+
+@export var hover_color: Color
+@export var pressed_color: Color
+
 var symbol_lines: Line2D
 
 var child_symbols: Array[SymbolDisplay]
 
+var state: State = State.NORMAL
 
 func _ready() -> void:
 	symbol_lines = Line2D.new()
@@ -47,24 +66,45 @@ func _draw() -> void:
 	
 	match symbol.border_type:
 		SymbolData.BorderType.SQUARE:
-			draw_square_border()
+			draw_square()
 		SymbolData.BorderType.CIRCLE:
 			var half_height: float = symbol_height / 2.0
+			draw_circle(Vector2(half_height, half_height), half_height, get_bg_color())
 			draw_circle(Vector2(half_height, half_height), half_height, Color.BLACK, false, 5)
 
 
-func draw_square_border() -> void:
+func draw_square() -> void:
+	var bounds := get_symbol_rect()
+	
+	draw_rect(bounds, get_bg_color())
+	
 	var corners: PackedVector2Array
 	
 	corners = PackedVector2Array([
 		Vector2(0, 0),
-		Vector2(0 * symbol.get_width(), symbol_height),
+		Vector2(0, symbol_height),
 		Vector2(symbol_height * symbol.get_width(), symbol_height),
 		Vector2(symbol_height * symbol.get_width(), 0),
-		Vector2(0 * symbol.get_width(), 0),
+		Vector2(0, 0),
 	])
 	
 	draw_polyline(corners, Color.BLACK, 5)
+
+
+func get_symbol_rect() -> Rect2:
+	return Rect2(Vector2(0, 0), Vector2(symbol_height * symbol.get_width(), symbol_height))
+
+
+func get_bg_color() -> Color:
+	match state:
+		State.NORMAL:
+			return bg_color
+		State.HOVERED:
+			return hover_color
+		State.PRESSED:
+			return pressed_color
+	
+	return bg_color
 
 
 func draw_symbol() -> void:
@@ -272,3 +312,44 @@ func draw_multisymbol() -> void:
 
 func _get_minimum_size():
 	return Vector2(symbol.get_width() * symbol_height, symbol_height)
+
+
+func _input(event: InputEvent) -> void:
+	if not is_button:
+		return
+	
+	if event is InputEventMouseMotion:
+		if contains_point(get_local_mouse_position()):
+			if state == State.NORMAL:
+				state = State.HOVERED
+				queue_redraw()
+				print("a")
+		elif state == State.HOVERED:
+			state = State.NORMAL
+			queue_redraw()
+			print("b")
+	elif event is InputEventMouseButton:
+		var left: bool = event.button_index == MOUSE_BUTTON_LEFT
+		
+		if contains_point(get_local_mouse_position()) and left and event.pressed:
+			state = State.PRESSED
+			pressed.emit()
+			queue_redraw()
+		elif state == State.PRESSED and left:
+			if contains_point(get_local_mouse_position()):
+				state = State.HOVERED
+			else:
+				state = State.NORMAL
+			queue_redraw()
+
+
+func contains_point(point: Vector2) -> bool:
+	if symbol.is_square():
+		return get_symbol_rect().has_point(point)
+	else:
+		var scaled_point: Vector2 = point / (symbol_height as float)
+		
+		var distance_from_center: float
+		distance_from_center = pow(scaled_point.x - 0.5, 2) + pow(scaled_point.y - 0.5, 2)
+		
+		return distance_from_center <= 1.0

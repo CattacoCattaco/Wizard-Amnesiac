@@ -1,7 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cdly6i4lxnov2"]
+[gd_scene load_steps=13 format=3 uid="uid://cdly6i4lxnov2"]
 
 [ext_resource type="Script" uid="uid://55r0wtsd6gs6" path="res://main/symbol/symbol_display.gd" id="1_53q0u"]
 [ext_resource type="Script" uid="uid://vuytrsscfx6d" path="res://main/symbol/symbol_data.gd" id="2_pjrb6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_pjrb6"]
+font_size = 48
 
 [sub_resource type="Resource" id="Resource_xwkvk"]
 script = ExtResource("2_pjrb6")
@@ -21,16 +24,148 @@ symbol = 6
 child_symbols = Array[ExtResource("2_pjrb6")]([SubResource("Resource_xwkvk"), SubResource("Resource_c651c")])
 metadata/_custom_type_script = "uid://vuytrsscfx6d"
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="Resource" id="Resource_3wy1v"]
+script = ExtResource("2_pjrb6")
+metadata/_custom_type_script = "uid://vuytrsscfx6d"
+
+[sub_resource type="Resource" id="Resource_kfbq2"]
+script = ExtResource("2_pjrb6")
+symbol = 1
+metadata/_custom_type_script = "uid://vuytrsscfx6d"
+
+[sub_resource type="Resource" id="Resource_4dugh"]
+script = ExtResource("2_pjrb6")
+symbol = 2
+metadata/_custom_type_script = "uid://vuytrsscfx6d"
+
+[sub_resource type="Resource" id="Resource_67ri8"]
+script = ExtResource("2_pjrb6")
+symbol = 3
+metadata/_custom_type_script = "uid://vuytrsscfx6d"
+
+[sub_resource type="Resource" id="Resource_grrlh"]
+script = ExtResource("2_pjrb6")
+symbol = 4
+metadata/_custom_type_script = "uid://vuytrsscfx6d"
+
+[sub_resource type="Resource" id="Resource_0i4oc"]
+script = ExtResource("2_pjrb6")
+symbol = 5
+metadata/_custom_type_script = "uid://vuytrsscfx6d"
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.15
+anchor_right = 0.5
+anchor_bottom = 0.15
+offset_left = -34.5
+offset_top = -11.5
+offset_right = 34.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Curiosity"
+label_settings = SubResource("LabelSettings_pjrb6")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Symbol" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 150.0
-offset_bottom = 100.0
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0.4
+anchor_right = 0.5
+anchor_bottom = 0.4
+offset_left = -83.333336
+offset_top = -50.0
+offset_right = 83.333336
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 script = ExtResource("1_53q0u")
 symbol = SubResource("Resource_pjrb6")
+bg_color = Color(1, 1, 1, 0.078431375)
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.75
+anchor_right = 0.5
+anchor_bottom = 0.75
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+theme_override_constants/separation = 50
+
+[node name="SymbolDisplay" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+script = ExtResource("1_53q0u")
+symbol = SubResource("Resource_3wy1v")
+bg_color = Color(1, 1, 1, 0.19607843)
+is_button = true
+hover_color = Color(0.5882353, 0.5882353, 0.5882353, 0.19607843)
+pressed_color = Color(0, 0, 0, 0.19607843)
+metadata/_custom_type_script = "uid://55r0wtsd6gs6"
+
+[node name="SymbolDisplay2" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+script = ExtResource("1_53q0u")
+symbol = SubResource("Resource_kfbq2")
+bg_color = Color(1, 1, 1, 0.19607843)
+is_button = true
+hover_color = Color(0.5882353, 0.5882353, 0.5882353, 0.19607843)
+pressed_color = Color(0, 0, 0, 0.19607843)
+metadata/_custom_type_script = "uid://55r0wtsd6gs6"
+
+[node name="SymbolDisplay3" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+script = ExtResource("1_53q0u")
+symbol = SubResource("Resource_4dugh")
+bg_color = Color(1, 1, 1, 0.19607843)
+is_button = true
+hover_color = Color(0.5882353, 0.5882353, 0.5882353, 0.19607843)
+pressed_color = Color(0, 0, 0, 0.19607843)
+metadata/_custom_type_script = "uid://55r0wtsd6gs6"
+
+[node name="SymbolDisplay4" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+script = ExtResource("1_53q0u")
+symbol = SubResource("Resource_67ri8")
+bg_color = Color(1, 1, 1, 0.19607843)
+is_button = true
+hover_color = Color(0.5882353, 0.5882353, 0.5882353, 0.19607843)
+pressed_color = Color(0, 0, 0, 0.19607843)
+metadata/_custom_type_script = "uid://55r0wtsd6gs6"
+
+[node name="SymbolDisplay5" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+script = ExtResource("1_53q0u")
+symbol = SubResource("Resource_grrlh")
+bg_color = Color(1, 1, 1, 0.19607843)
+is_button = true
+hover_color = Color(0.5882353, 0.5882353, 0.5882353, 0.19607843)
+pressed_color = Color(0, 0, 0, 0.19607843)
+metadata/_custom_type_script = "uid://55r0wtsd6gs6"
+
+[node name="SymbolDisplay6" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+script = ExtResource("1_53q0u")
+symbol = SubResource("Resource_0i4oc")
+bg_color = Color(1, 1, 1, 0.19607843)
+is_button = true
+hover_color = Color(0.5882353, 0.5882353, 0.5882353, 0.19607843)
+pressed_color = Color(0, 0, 0, 0.19607843)
+metadata/_custom_type_script = "uid://55r0wtsd6gs6"
