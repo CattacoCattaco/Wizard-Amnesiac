@@ -1,27 +1,17 @@
-[gd_scene load_steps=13 format=3 uid="uid://cdly6i4lxnov2"]
+[gd_scene load_steps=12 format=3 uid="uid://cdly6i4lxnov2"]
 
 [ext_resource type="Script" uid="uid://55r0wtsd6gs6" path="res://main/symbol/symbol_display.gd" id="1_53q0u"]
+[ext_resource type="Script" uid="uid://fjxv86xw4ffq" path="res://main/symbol/GuessSymbol/guess_symbol.gd" id="1_xwkvk"]
 [ext_resource type="Script" uid="uid://vuytrsscfx6d" path="res://main/symbol/symbol_data.gd" id="2_pjrb6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_pjrb6"]
 font_size = 48
-
-[sub_resource type="Resource" id="Resource_xwkvk"]
-script = ExtResource("2_pjrb6")
-border_type = 1
-symbol = 4
-metadata/_custom_type_script = "uid://vuytrsscfx6d"
-
-[sub_resource type="Resource" id="Resource_c651c"]
-script = ExtResource("2_pjrb6")
-border_type = 1
-symbol = 1
-metadata/_custom_type_script = "uid://vuytrsscfx6d"
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Resource" id="Resource_pjrb6"]
 script = ExtResource("2_pjrb6")
 symbol = 6
-child_symbols = Array[ExtResource("2_pjrb6")]([SubResource("Resource_xwkvk"), SubResource("Resource_c651c")])
 metadata/_custom_type_script = "uid://vuytrsscfx6d"
 
 [sub_resource type="Resource" id="Resource_3wy1v"]
@@ -61,17 +51,34 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="."]
+[node name="ColorRect3" type="ColorRect" parent="."]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.595, 0.8075, 0.85, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="ColorRect3"]
+custom_minimum_size = Vector2(0, 125)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+color = Color(0.294, 0.42, 0.42, 1)
+
+[node name="Label" type="Label" parent="ColorRect3/ColorRect2"]
+layout_mode = 1
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 0.15
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.15
-offset_left = -34.5
-offset_top = -11.5
-offset_right = 34.5
-offset_bottom = 11.5
+anchor_bottom = 0.5
+offset_left = -103.0
+offset_top = -33.5
+offset_right = 103.0
+offset_bottom = 33.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "Curiosity"
@@ -79,38 +86,53 @@ label_settings = SubResource("LabelSettings_pjrb6")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Symbol" type="Control" parent="."]
+[node name="GuessSymbol" type="Control" parent="ColorRect3" node_paths=PackedStringArray("symbol_buttons")]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 1
 anchor_left = 0.5
-anchor_top = 0.4
+anchor_top = 0.475
 anchor_right = 0.5
-anchor_bottom = 0.4
-offset_left = -83.333336
+anchor_bottom = 0.475
 offset_top = -50.0
-offset_right = 83.333336
 offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-script = ExtResource("1_53q0u")
+script = ExtResource("1_xwkvk")
+symbol_buttons = [NodePath("../ColorRect/HBoxContainer/HopeButton"), NodePath("../ColorRect/HBoxContainer/StabilityButton"), NodePath("../ColorRect/HBoxContainer/LoveButton"), NodePath("../ColorRect/HBoxContainer/LossButton"), NodePath("../ColorRect/HBoxContainer/EntropyButton"), NodePath("../ColorRect/HBoxContainer/CuriosityButton")]
 symbol = SubResource("Resource_pjrb6")
-bg_color = Color(1, 1, 1, 0.078431375)
+bg_color = Color(1, 1, 1, 0.08235294)
+metadata/_custom_type_script = "uid://55r0wtsd6gs6"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="ColorRect" type="ColorRect" parent="ColorRect3"]
+custom_minimum_size = Vector2(0, 150)
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.75
-anchor_right = 0.5
-anchor_bottom = 0.75
-offset_left = -20.0
-offset_top = -40.0
-offset_right = 20.0
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -150.0
 grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.511, 0.73, 0.73, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect3/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -383.0
+offset_top = -50.0
+offset_right = 383.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/separation = 50
 
-[node name="SymbolDisplay" type="Control" parent="HBoxContainer"]
+[node name="HopeButton" type="Control" parent="ColorRect3/ColorRect/HBoxContainer"]
 layout_mode = 2
 script = ExtResource("1_53q0u")
 symbol = SubResource("Resource_3wy1v")
@@ -120,7 +142,7 @@ hover_color = Color(0.5882353, 0.5882353, 0.5882353, 0.19607843)
 pressed_color = Color(0, 0, 0, 0.19607843)
 metadata/_custom_type_script = "uid://55r0wtsd6gs6"
 
-[node name="SymbolDisplay2" type="Control" parent="HBoxContainer"]
+[node name="StabilityButton" type="Control" parent="ColorRect3/ColorRect/HBoxContainer"]
 layout_mode = 2
 script = ExtResource("1_53q0u")
 symbol = SubResource("Resource_kfbq2")
@@ -130,7 +152,7 @@ hover_color = Color(0.5882353, 0.5882353, 0.5882353, 0.19607843)
 pressed_color = Color(0, 0, 0, 0.19607843)
 metadata/_custom_type_script = "uid://55r0wtsd6gs6"
 
-[node name="SymbolDisplay3" type="Control" parent="HBoxContainer"]
+[node name="LoveButton" type="Control" parent="ColorRect3/ColorRect/HBoxContainer"]
 layout_mode = 2
 script = ExtResource("1_53q0u")
 symbol = SubResource("Resource_4dugh")
@@ -140,7 +162,7 @@ hover_color = Color(0.5882353, 0.5882353, 0.5882353, 0.19607843)
 pressed_color = Color(0, 0, 0, 0.19607843)
 metadata/_custom_type_script = "uid://55r0wtsd6gs6"
 
-[node name="SymbolDisplay4" type="Control" parent="HBoxContainer"]
+[node name="LossButton" type="Control" parent="ColorRect3/ColorRect/HBoxContainer"]
 layout_mode = 2
 script = ExtResource("1_53q0u")
 symbol = SubResource("Resource_67ri8")
@@ -150,7 +172,7 @@ hover_color = Color(0.5882353, 0.5882353, 0.5882353, 0.19607843)
 pressed_color = Color(0, 0, 0, 0.19607843)
 metadata/_custom_type_script = "uid://55r0wtsd6gs6"
 
-[node name="SymbolDisplay5" type="Control" parent="HBoxContainer"]
+[node name="EntropyButton" type="Control" parent="ColorRect3/ColorRect/HBoxContainer"]
 layout_mode = 2
 script = ExtResource("1_53q0u")
 symbol = SubResource("Resource_grrlh")
@@ -160,7 +182,7 @@ hover_color = Color(0.5882353, 0.5882353, 0.5882353, 0.19607843)
 pressed_color = Color(0, 0, 0, 0.19607843)
 metadata/_custom_type_script = "uid://55r0wtsd6gs6"
 
-[node name="SymbolDisplay6" type="Control" parent="HBoxContainer"]
+[node name="CuriosityButton" type="Control" parent="ColorRect3/ColorRect/HBoxContainer"]
 layout_mode = 2
 script = ExtResource("1_53q0u")
 symbol = SubResource("Resource_0i4oc")

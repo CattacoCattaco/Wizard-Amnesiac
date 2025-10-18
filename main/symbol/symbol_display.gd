@@ -24,6 +24,7 @@ enum State {
 	set(value):
 		update = false
 		queue_redraw()
+		set_custom_minimum_size(_get_minimum_size())
 
 @export var bg_color: Color:
 	set(value):
@@ -41,6 +42,7 @@ var child_symbols: Array[SymbolDisplay]
 
 var state: State = State.NORMAL
 
+
 func _ready() -> void:
 	symbol_lines = Line2D.new()
 	add_child(symbol_lines)
@@ -51,6 +53,37 @@ func _ready() -> void:
 	symbol_lines.begin_cap_mode = Line2D.LINE_CAP_ROUND
 	symbol_lines.end_cap_mode = Line2D.LINE_CAP_ROUND
 	symbol_lines.joint_mode = Line2D.LINE_JOINT_ROUND
+
+
+func _get_minimum_size():
+	return Vector2(symbol.get_width() * symbol_height, symbol_height)
+
+
+func _input(event: InputEvent) -> void:
+	if not is_button:
+		return
+	
+	if event is InputEventMouseMotion:
+		if contains_point(get_local_mouse_position()):
+			if state == State.NORMAL:
+				state = State.HOVERED
+				queue_redraw()
+		elif state == State.HOVERED:
+			state = State.NORMAL
+			queue_redraw()
+	elif event is InputEventMouseButton:
+		var left: bool = event.button_index == MOUSE_BUTTON_LEFT
+		
+		if contains_point(get_local_mouse_position()) and left and event.pressed:
+			state = State.PRESSED
+			pressed.emit()
+			queue_redraw()
+		elif state == State.PRESSED and left:
+			if contains_point(get_local_mouse_position()):
+				state = State.HOVERED
+			else:
+				state = State.NORMAL
+			queue_redraw()
 
 
 func _draw() -> void:
@@ -302,45 +335,14 @@ func draw_multisymbol() -> void:
 		var child_symbol := SymbolDisplay.new()
 		child_symbol.symbol_height = symbol_height
 		child_symbol.symbol = symbol_data
+		child_symbol.bg_color = Color.TRANSPARENT
+		child_symbol.mouse_filter = MOUSE_FILTER_PASS
 		
 		add_child(child_symbol)
 		child_symbols.append(child_symbol)
 		
 		child_symbol.position = Vector2(progress, 0)
 		progress += symbol_data.get_width() * child_symbol.symbol_height
-
-
-func _get_minimum_size():
-	return Vector2(symbol.get_width() * symbol_height, symbol_height)
-
-
-func _input(event: InputEvent) -> void:
-	if not is_button:
-		return
-	
-	if event is InputEventMouseMotion:
-		if contains_point(get_local_mouse_position()):
-			if state == State.NORMAL:
-				state = State.HOVERED
-				queue_redraw()
-				print("a")
-		elif state == State.HOVERED:
-			state = State.NORMAL
-			queue_redraw()
-			print("b")
-	elif event is InputEventMouseButton:
-		var left: bool = event.button_index == MOUSE_BUTTON_LEFT
-		
-		if contains_point(get_local_mouse_position()) and left and event.pressed:
-			state = State.PRESSED
-			pressed.emit()
-			queue_redraw()
-		elif state == State.PRESSED and left:
-			if contains_point(get_local_mouse_position()):
-				state = State.HOVERED
-			else:
-				state = State.NORMAL
-			queue_redraw()
 
 
 func contains_point(point: Vector2) -> bool:
