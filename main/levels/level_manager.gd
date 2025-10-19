@@ -75,6 +75,8 @@ func load_level(index: int) -> void:
 	
 	if len(current_level.messages) > 0:
 		load_message(0)
+	else:
+		message_screen.hide()
 
 
 func load_message(index: int) -> void:

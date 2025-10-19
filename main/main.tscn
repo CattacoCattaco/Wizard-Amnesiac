@@ -1,5 +1,6 @@
-[gd_scene load_steps=27 format=3 uid="uid://cdly6i4lxnov2"]
+[gd_scene load_steps=32 format=3 uid="uid://cdly6i4lxnov2"]
 
+[ext_resource type="Script" uid="uid://55r0wtsd6gs6" path="res://main/symbol/symbol_display.gd" id="1_53q0u"]
 [ext_resource type="Script" uid="uid://fjxv86xw4ffq" path="res://main/symbol/guess_symbol/guess_symbol.gd" id="1_xwkvk"]
 [ext_resource type="Script" uid="uid://vuytrsscfx6d" path="res://main/symbol/symbol_data.gd" id="2_pjrb6"]
 [ext_resource type="Texture2D" uid="uid://bs0v88pf178dd" path="res://main/next_button/next.svg" id="3_73k8k"]
@@ -22,6 +23,7 @@
 [ext_resource type="Resource" uid="uid://uclg6b67nh8x" path="res://main/levels/data/passion.tres" id="20_re7it"]
 [ext_resource type="Resource" uid="uid://dni6ot66qm4fc" path="res://main/levels/data/amnesia.tres" id="21_jofbb"]
 [ext_resource type="Resource" uid="uid://0w2frlr4ffcy" path="res://main/messages/data/victory.tres" id="21_vapsy"]
+[ext_resource type="Script" uid="uid://d27whvsiij5hm" path="res://main/icon_maker/icon_maker.gd" id="23_oagth"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_pjrb6"]
 font_size = 48
@@ -43,6 +45,24 @@ line_spacing = 10.0
 font_size = 30
 outline_size = 10
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Resource" id="Resource_n53tw"]
+script = ExtResource("2_pjrb6")
+border_type = 1
+symbol = 3
+metadata/_custom_type_script = "uid://vuytrsscfx6d"
+
+[sub_resource type="Resource" id="Resource_d00gp"]
+script = ExtResource("2_pjrb6")
+border_type = 1
+symbol = 5
+metadata/_custom_type_script = "uid://vuytrsscfx6d"
+
+[sub_resource type="Resource" id="Resource_d8vpj"]
+script = ExtResource("2_pjrb6")
+symbol = 6
+child_symbols = Array[ExtResource("2_pjrb6")]([SubResource("Resource_n53tw"), SubResource("Resource_n53tw"), SubResource("Resource_d00gp")])
+metadata/_custom_type_script = "uid://vuytrsscfx6d"
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -235,3 +255,41 @@ message_screen = NodePath("../MessageScreen")
 message_title = NodePath("../MessageScreen/MessageBox/TitleBar/MessageTitle")
 message_label = NodePath("../MessageScreen/MessageBox/MessageLabel")
 next_message_button = NodePath("../MessageScreen/NextButton")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+offset_left = -500.0
+offset_top = -500.0
+offset_right = -200.0
+offset_bottom = -200.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+size = Vector2i(300, 300)
+script = ExtResource("23_oagth")
+
+[node name="Control" type="ColorRect" parent="SubViewportContainer/SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.59607846, 0.80784315, 0.8509804, 1)
+
+[node name="SymbolDisplay" type="Control" parent="SubViewportContainer/SubViewport/Control"]
+custom_minimum_size = Vector2(250, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_53q0u")
+symbol = SubResource("Resource_d8vpj")
+bg_color = Color(0.50980395, 0.7294118, 0.7294118, 1)
+metadata/_custom_type_script = "uid://55r0wtsd6gs6"

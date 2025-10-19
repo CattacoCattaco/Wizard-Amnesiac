@@ -13,7 +13,7 @@ config_version=5
 config/name="Spell-Crafting"
 run/main_scene="uid://cdly6i4lxnov2"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://oi5a8nxotd07"
 
 [editor_plugins]
 
