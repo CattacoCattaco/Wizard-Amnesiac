@@ -12,7 +12,7 @@
 
 [resource]
 script = ExtResource("9_uk8p7")
-goal_name = "Knowledge"
+goal_name = "Amnesia"
 goal = Array[ExtResource("1_n37wu")]([ExtResource("5_u8oq1"), ExtResource("5_u8oq1"), ExtResource("7_40lj4")])
 given_symbols = Array[ExtResource("1_n37wu")]([ExtResource("2_ealm1"), ExtResource("3_l6or6"), ExtResource("4_jw5sf"), ExtResource("5_u8oq1"), ExtResource("6_pi0nq"), ExtResource("7_40lj4")])
 metadata/_custom_type_script = "uid://dd5sspu7y17ns"
