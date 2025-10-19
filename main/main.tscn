@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cdly6i4lxnov2"]
+[gd_scene load_steps=27 format=3 uid="uid://cdly6i4lxnov2"]
 
 [ext_resource type="Script" uid="uid://fjxv86xw4ffq" path="res://main/symbol/guess_symbol/guess_symbol.gd" id="1_xwkvk"]
 [ext_resource type="Script" uid="uid://vuytrsscfx6d" path="res://main/symbol/symbol_data.gd" id="2_pjrb6"]
@@ -20,6 +20,7 @@
 [ext_resource type="Resource" uid="uid://b3ayc5i7h5u5f" path="res://main/levels/data/knowledge.tres" id="18_vapsy"]
 [ext_resource type="Resource" uid="uid://b62qysn4thjpk" path="res://main/levels/data/science.tres" id="19_jofbb"]
 [ext_resource type="Resource" uid="uid://uclg6b67nh8x" path="res://main/levels/data/passion.tres" id="20_re7it"]
+[ext_resource type="Resource" uid="uid://dni6ot66qm4fc" path="res://main/levels/data/amnesia.tres" id="21_jofbb"]
 [ext_resource type="Resource" uid="uid://0w2frlr4ffcy" path="res://main/messages/data/victory.tres" id="21_vapsy"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_pjrb6"]
@@ -224,7 +225,7 @@ texture_click_mask = ExtResource("6_s758e")
 
 [node name="LevelManager" type="Node" parent="." node_paths=PackedStringArray("goal_label", "guess_symbol", "next_level_button", "symbol_button_container", "message_screen", "message_title", "message_label", "next_message_button")]
 script = ExtResource("4_c651c")
-levels = Array[ExtResource("5_bsumw")]([ExtResource("6_fwcvl"), ExtResource("7_na0o7"), ExtResource("8_73k8k"), ExtResource("9_5xyti"), ExtResource("10_n3o0a"), ExtResource("11_s758e"), ExtResource("15_n3o0a"), ExtResource("16_s758e"), ExtResource("17_q0sk7"), ExtResource("18_vapsy"), ExtResource("19_jofbb"), ExtResource("20_re7it")])
+levels = Array[ExtResource("5_bsumw")]([ExtResource("6_fwcvl"), ExtResource("7_na0o7"), ExtResource("8_73k8k"), ExtResource("9_5xyti"), ExtResource("10_n3o0a"), ExtResource("11_s758e"), ExtResource("15_n3o0a"), ExtResource("16_s758e"), ExtResource("17_q0sk7"), ExtResource("18_vapsy"), ExtResource("19_jofbb"), ExtResource("20_re7it"), ExtResource("21_jofbb")])
 goal_label = NodePath("../SymbolScreen/TitleBar/Label")
 guess_symbol = NodePath("../SymbolScreen/GuessSymbol")
 next_level_button = NodePath("../SymbolScreen/NextButton")
