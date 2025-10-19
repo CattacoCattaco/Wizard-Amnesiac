@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MessageData" load_steps=2 format=3 uid="uid://0w2frlr4ffcy"]
+
+[ext_resource type="Script" uid="uid://drwnxfjyrmc6d" path="res://main/messages/message_data.gd" id="1_i8kfm"]
+
+[resource]
+script = ExtResource("1_i8kfm")
+title = "Success"
+message = "You passed the test. You have proven that you know how runes work. Or at least, you have shown that you know the basic ones. More coming soon."
+metadata/_custom_type_script = "uid://drwnxfjyrmc6d"

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=11 format=3 uid="uid://dy45i7gwsjbru"]
+
+[ext_resource type="Script" uid="uid://vuytrsscfx6d" path="res://main/symbol/symbol_data.gd" id="1_jqki1"]
+[ext_resource type="Script" uid="uid://dd5sspu7y17ns" path="res://main/levels/level_data.gd" id="2_p4w2i"]
+[ext_resource type="Resource" uid="uid://cuptikph1tnku" path="res://main/symbol/data/hope.tres" id="2_rc3o3"]
+[ext_resource type="Resource" uid="uid://la8cvmhi0ev4" path="res://main/symbol/data/stability.tres" id="3_o715i"]
+[ext_resource type="Resource" uid="uid://d1ey1p1k4b4bu" path="res://main/symbol/data/love.tres" id="4_0pb8p"]
+[ext_resource type="Resource" uid="uid://ybygjait4n1p" path="res://main/symbol/data/loss.tres" id="5_3eha5"]
+[ext_resource type="Resource" uid="uid://d3fncp45pke3a" path="res://main/symbol/data/entropy.tres" id="6_yrmsw"]
+[ext_resource type="Resource" uid="uid://cckjn80cl1h77" path="res://main/symbol/data/curiosity.tres" id="7_3sut0"]
+[ext_resource type="Script" uid="uid://drwnxfjyrmc6d" path="res://main/messages/message_data.gd" id="8_o715i"]
+[ext_resource type="Resource" uid="uid://c8tml8lv8e5fj" path="res://main/messages/data/complex_runes.tres" id="9_0pb8p"]
+
+[resource]
+script = ExtResource("2_p4w2i")
+goal_name = "Dispair"
+goal = Array[ExtResource("1_jqki1")]([ExtResource("5_3eha5"), ExtResource("2_rc3o3")])
+given_symbols = Array[ExtResource("1_jqki1")]([ExtResource("2_rc3o3"), ExtResource("3_o715i"), ExtResource("4_0pb8p"), ExtResource("5_3eha5"), ExtResource("6_yrmsw"), ExtResource("7_3sut0")])
+messages = Array[ExtResource("8_o715i")]([ExtResource("9_0pb8p")])
+metadata/_custom_type_script = "uid://dd5sspu7y17ns"

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MessageData" load_steps=2 format=3 uid="uid://cb28exys7m66w"]
+
+[ext_resource type="Script" uid="uid://drwnxfjyrmc6d" path="res://main/messages/message_data.gd" id="1_0ww4s"]
+
+[resource]
+script = ExtResource("1_0ww4s")
+title = "Welcome to the Test"
+message = "On each question, you will be given a set of component runes. Add component runes until you reach the target rune. If you make a mistake, you may press backspace to delete the most recent rune or R to reset the level. Once you reach the target rune, an arrow will appear allowing you to advance to the next level."
+metadata/_custom_type_script = "uid://drwnxfjyrmc6d"

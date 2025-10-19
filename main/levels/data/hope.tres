@@ -1,12 +1,17 @@
-[gd_resource type="Resource" script_class="LevelData" load_steps=4 format=3 uid="uid://gks40bnw3adi"]
+[gd_resource type="Resource" script_class="LevelData" load_steps=8 format=3 uid="uid://gks40bnw3adi"]
 
-[ext_resource type="Script" uid="uid://vuytrsscfx6d" path="res://main/symbol/symbol_data.gd" id="1_gpax3"]
-[ext_resource type="Script" uid="uid://dd5sspu7y17ns" path="res://main/levels/level_data.gd" id="1_l5u3j"]
-[ext_resource type="Resource" uid="uid://cuptikph1tnku" path="res://main/symbol/data/hope.tres" id="3_2gbbc"]
+[ext_resource type="Script" uid="uid://vuytrsscfx6d" path="res://main/symbol/symbol_data.gd" id="1_hp2oa"]
+[ext_resource type="Resource" uid="uid://cuptikph1tnku" path="res://main/symbol/data/hope.tres" id="2_biyuc"]
+[ext_resource type="Script" uid="uid://drwnxfjyrmc6d" path="res://main/messages/message_data.gd" id="3_mdmef"]
+[ext_resource type="Resource" uid="uid://kx13csniu8ey" path="res://main/messages/data/start_a.tres" id="4_40rrs"]
+[ext_resource type="Resource" uid="uid://cb28exys7m66w" path="res://main/messages/data/start_b.tres" id="5_jhvib"]
+[ext_resource type="Resource" uid="uid://bpmumt0b68j42" path="res://main/messages/data/start_c.tres" id="6_720v0"]
+[ext_resource type="Script" uid="uid://dd5sspu7y17ns" path="res://main/levels/level_data.gd" id="7_tbmug"]
 
 [resource]
-script = ExtResource("1_l5u3j")
+script = ExtResource("7_tbmug")
 goal_name = "Hope"
-goal = Array[ExtResource("1_gpax3")]([ExtResource("3_2gbbc")])
-given_symbols = Array[ExtResource("1_gpax3")]([ExtResource("3_2gbbc")])
+goal = Array[ExtResource("1_hp2oa")]([ExtResource("2_biyuc")])
+given_symbols = Array[ExtResource("1_hp2oa")]([ExtResource("2_biyuc")])
+messages = Array[ExtResource("3_mdmef")]([ExtResource("4_40rrs"), ExtResource("5_jhvib"), ExtResource("6_720v0")])
 metadata/_custom_type_script = "uid://dd5sspu7y17ns"

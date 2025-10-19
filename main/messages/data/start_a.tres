@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MessageData" load_steps=2 format=3 uid="uid://kx13csniu8ey"]
+
+[ext_resource type="Script" uid="uid://drwnxfjyrmc6d" path="res://main/messages/message_data.gd" id="1_0md7g"]
+
+[resource]
+script = ExtResource("1_0md7g")
+title = "Welcome to the Test"
+message = "You are going to be tested on your memory of magical runes. You remember how runes work, right? It would be bad if you forgot."
+metadata/_custom_type_script = "uid://drwnxfjyrmc6d"

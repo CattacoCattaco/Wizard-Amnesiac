@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MessageData" load_steps=2 format=3 uid="uid://c8tml8lv8e5fj"]
+
+[ext_resource type="Script" uid="uid://drwnxfjyrmc6d" path="res://main/messages/message_data.gd" id="1_6xmqh"]
+
+[resource]
+script = ExtResource("1_6xmqh")
+title = "Composite Runes"
+message = "We will now move on to composite runes, runes made up of multiple element runes. Your memory of how the elements combine will be key here."
+metadata/_custom_type_script = "uid://drwnxfjyrmc6d"

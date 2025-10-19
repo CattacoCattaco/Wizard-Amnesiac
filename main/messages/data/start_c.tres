@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MessageData" load_steps=2 format=3 uid="uid://bpmumt0b68j42"]
+
+[ext_resource type="Script" uid="uid://drwnxfjyrmc6d" path="res://main/messages/message_data.gd" id="1_kw7hh"]
+
+[resource]
+script = ExtResource("1_kw7hh")
+title = "Welcome to the Test"
+message = "We will start with the six basic element runes. Good luck!"
+metadata/_custom_type_script = "uid://drwnxfjyrmc6d"

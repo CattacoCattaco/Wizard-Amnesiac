@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=9 format=3 uid="uid://bceebetlnvka1"]
+
+[ext_resource type="Script" uid="uid://vuytrsscfx6d" path="res://main/symbol/symbol_data.gd" id="1_xx30u"]
+[ext_resource type="Resource" uid="uid://cuptikph1tnku" path="res://main/symbol/data/hope.tres" id="2_7i5jg"]
+[ext_resource type="Resource" uid="uid://la8cvmhi0ev4" path="res://main/symbol/data/stability.tres" id="3_o3556"]
+[ext_resource type="Resource" uid="uid://d1ey1p1k4b4bu" path="res://main/symbol/data/love.tres" id="4_tnxfd"]
+[ext_resource type="Resource" uid="uid://ybygjait4n1p" path="res://main/symbol/data/loss.tres" id="5_nla21"]
+[ext_resource type="Resource" uid="uid://d3fncp45pke3a" path="res://main/symbol/data/entropy.tres" id="6_ca4xa"]
+[ext_resource type="Resource" uid="uid://cckjn80cl1h77" path="res://main/symbol/data/curiosity.tres" id="7_hhl4u"]
+[ext_resource type="Script" uid="uid://dd5sspu7y17ns" path="res://main/levels/level_data.gd" id="8_yw2pu"]
+
+[resource]
+script = ExtResource("8_yw2pu")
+goal_name = "Morbidness"
+goal = Array[ExtResource("1_xx30u")]([ExtResource("2_7i5jg"), ExtResource("5_nla21")])
+given_symbols = Array[ExtResource("1_xx30u")]([ExtResource("2_7i5jg"), ExtResource("3_o3556"), ExtResource("4_tnxfd"), ExtResource("5_nla21"), ExtResource("6_ca4xa"), ExtResource("7_hhl4u")])
+metadata/_custom_type_script = "uid://dd5sspu7y17ns"

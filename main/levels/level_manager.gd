@@ -9,18 +9,38 @@ extends Node
 @export var next_level_button: TextureButton
 @export var symbol_button_container: HBoxContainer
 
+@export var end_message: MessageData
+
+@export var message_screen: ColorRect
+@export var message_title: Label
+@export var message_label: Label
+@export var next_message_button: TextureButton
+
 var symbol_buttons: Array[SymbolDisplay] = []
+var current_message_index: int = 0
 
 
 func _ready() -> void:
 	load_level(current_level_index)
 	guess_symbol.symbol_added.connect(_check_guess)
-	next_level_button.pressed.connect(next_level)
+	next_level_button.pressed.connect(_next_level)
+	next_message_button.pressed.connect(_next_message)
 
 
-func next_level() -> void:
+func _next_level() -> void:
 	if current_level_index < len(levels) - 1:
 		load_level(current_level_index + 1)
+	else:
+		load_message(-1)
+
+
+func _next_message() -> void:
+	var current_level: LevelData = levels[current_level_index]
+	
+	if len(current_level.messages) == current_message_index + 1:
+		message_screen.hide()
+	else:
+		load_message(current_message_index + 1)
 
 
 func load_level(index: int) -> void:
@@ -52,6 +72,29 @@ func load_level(index: int) -> void:
 		
 		symbol_button_container.add_child(symbol_button)
 		symbol_buttons.append(symbol_button)
+	
+	if len(current_level.messages) > 0:
+		load_message(0)
+
+
+func load_message(index: int) -> void:
+	var current_level: LevelData = levels[current_level_index]
+	
+	current_message_index = index
+	
+	var current_message: MessageData
+	if index < 0:
+		current_message = end_message
+	else:
+		current_message = current_level.messages[index]
+	
+	message_screen.show()
+	
+	message_title.text = current_message.title
+	message_label.text = current_message.message
+	
+	if index < 0:
+		next_message_button.hide()
 
 
 func _check_guess(guess: Array[SymbolData]) -> void:
@@ -68,6 +111,4 @@ func _check_guess(guess: Array[SymbolData]) -> void:
 
 
 func win() -> void:
-	print("You win!")
-	
 	next_level_button.show()

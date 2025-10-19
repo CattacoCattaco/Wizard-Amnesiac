@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cdly6i4lxnov2"]
+[gd_scene load_steps=26 format=3 uid="uid://cdly6i4lxnov2"]
 
 [ext_resource type="Script" uid="uid://fjxv86xw4ffq" path="res://main/symbol/guess_symbol/guess_symbol.gd" id="1_xwkvk"]
 [ext_resource type="Script" uid="uid://vuytrsscfx6d" path="res://main/symbol/symbol_data.gd" id="2_pjrb6"]
@@ -14,6 +14,13 @@
 [ext_resource type="Resource" uid="uid://yulasxeq6f80" path="res://main/levels/data/loss.tres" id="9_5xyti"]
 [ext_resource type="Resource" uid="uid://ckedu5iw4f7v1" path="res://main/levels/data/entropy.tres" id="10_n3o0a"]
 [ext_resource type="Resource" uid="uid://dumiaahn5n7re" path="res://main/levels/data/curiosity.tres" id="11_s758e"]
+[ext_resource type="Resource" uid="uid://dy45i7gwsjbru" path="res://main/levels/data/dispair.tres" id="15_n3o0a"]
+[ext_resource type="Resource" uid="uid://bceebetlnvka1" path="res://main/levels/data/morbidness.tres" id="16_s758e"]
+[ext_resource type="Resource" uid="uid://dkit75b47vcdn" path="res://main/levels/data/fragility.tres" id="17_q0sk7"]
+[ext_resource type="Resource" uid="uid://b3ayc5i7h5u5f" path="res://main/levels/data/knowledge.tres" id="18_vapsy"]
+[ext_resource type="Resource" uid="uid://b62qysn4thjpk" path="res://main/levels/data/science.tres" id="19_jofbb"]
+[ext_resource type="Resource" uid="uid://uclg6b67nh8x" path="res://main/levels/data/passion.tres" id="20_re7it"]
+[ext_resource type="Resource" uid="uid://0w2frlr4ffcy" path="res://main/messages/data/victory.tres" id="21_vapsy"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_pjrb6"]
 font_size = 48
@@ -25,6 +32,17 @@ script = ExtResource("2_pjrb6")
 symbol = 6
 metadata/_custom_type_script = "uid://vuytrsscfx6d"
 
+[sub_resource type="LabelSettings" id="LabelSettings_q0sk7"]
+font_size = 48
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_vapsy"]
+line_spacing = 10.0
+font_size = 30
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
 [node name="Main" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -33,7 +51,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect3" type="ColorRect" parent="."]
+[node name="SymbolScreen" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -42,7 +60,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.595, 0.8075, 0.85, 1)
 
-[node name="ColorRect2" type="ColorRect" parent="ColorRect3"]
+[node name="TitleBar" type="ColorRect" parent="SymbolScreen"]
 custom_minimum_size = Vector2(0, 125)
 layout_mode = 1
 anchors_preset = 10
@@ -50,7 +68,7 @@ anchor_right = 1.0
 grow_horizontal = 2
 color = Color(0.294, 0.42, 0.42, 1)
 
-[node name="Label" type="Label" parent="ColorRect3/ColorRect2"]
+[node name="Label" type="Label" parent="SymbolScreen/TitleBar"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -68,7 +86,7 @@ label_settings = SubResource("LabelSettings_pjrb6")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GuessSymbol" type="Control" parent="ColorRect3" node_paths=PackedStringArray("symbol_buttons")]
+[node name="GuessSymbol" type="Control" parent="SymbolScreen" node_paths=PackedStringArray("symbol_buttons")]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 1
 anchor_left = 0.5
@@ -87,7 +105,7 @@ symbol = SubResource("Resource_pjrb6")
 bg_color = Color(1, 1, 1, 0.08235294)
 metadata/_custom_type_script = "uid://55r0wtsd6gs6"
 
-[node name="NextButton" type="TextureButton" parent="ColorRect3"]
+[node name="NextButton" type="TextureButton" parent="SymbolScreen"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.98
@@ -104,7 +122,7 @@ texture_pressed = ExtResource("4_5xyti")
 texture_hover = ExtResource("5_n3o0a")
 texture_click_mask = ExtResource("6_s758e")
 
-[node name="ColorRect" type="ColorRect" parent="ColorRect3"]
+[node name="SymbolButtonsBar" type="ColorRect" parent="SymbolScreen"]
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 1
 anchors_preset = 12
@@ -114,9 +132,9 @@ anchor_bottom = 1.0
 offset_top = -150.0
 grow_horizontal = 2
 grow_vertical = 0
-color = Color(0.511, 0.73, 0.73, 1)
+color = Color(0.50980395, 0.7294118, 0.7294118, 1)
 
-[node name="SymbolButtonContainer" type="HBoxContainer" parent="ColorRect3/ColorRect"]
+[node name="SymbolButtonContainer" type="HBoxContainer" parent="SymbolScreen/SymbolButtonsBar"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -128,10 +146,91 @@ grow_vertical = 2
 theme_override_constants/separation = 50
 alignment = 1
 
-[node name="LevelManager" type="Node" parent="." node_paths=PackedStringArray("goal_label", "guess_symbol", "next_level_button", "symbol_button_container")]
+[node name="MessageScreen" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.595, 0.8075, 0.85, 1)
+
+[node name="MessageBox" type="ColorRect" parent="MessageScreen"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.15
+anchor_top = 0.25
+anchor_right = 0.85
+anchor_bottom = 0.75
+offset_top = -90.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.50980395, 0.7294118, 0.7294118, 1)
+
+[node name="TitleBar" type="ColorRect" parent="MessageScreen/MessageBox"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 80.0
+grow_horizontal = 2
+color = Color(0.294, 0.42, 0.42, 1)
+
+[node name="MessageTitle" type="Label" parent="MessageScreen/MessageBox/TitleBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Welcome to the Test"
+label_settings = SubResource("LabelSettings_q0sk7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MessageLabel" type="Label" parent="MessageScreen/MessageBox"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 100.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "You are going to be tested on your memory of magical runes. You remember how runes work, right? It would be bad if you forgot."
+label_settings = SubResource("LabelSettings_vapsy")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="NextButton" type="TextureButton" parent="MessageScreen"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.98
+anchor_top = 0.475
+anchor_right = 0.98
+anchor_bottom = 0.475
+offset_left = -40.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+texture_normal = ExtResource("3_73k8k")
+texture_pressed = ExtResource("4_5xyti")
+texture_hover = ExtResource("5_n3o0a")
+texture_click_mask = ExtResource("6_s758e")
+
+[node name="LevelManager" type="Node" parent="." node_paths=PackedStringArray("goal_label", "guess_symbol", "next_level_button", "symbol_button_container", "message_screen", "message_title", "message_label", "next_message_button")]
 script = ExtResource("4_c651c")
-levels = Array[ExtResource("5_bsumw")]([ExtResource("6_fwcvl"), ExtResource("7_na0o7"), ExtResource("8_73k8k"), ExtResource("9_5xyti"), ExtResource("10_n3o0a"), ExtResource("11_s758e")])
-goal_label = NodePath("../ColorRect3/ColorRect2/Label")
-guess_symbol = NodePath("../ColorRect3/GuessSymbol")
-next_level_button = NodePath("../ColorRect3/NextButton")
-symbol_button_container = NodePath("../ColorRect3/ColorRect/SymbolButtonContainer")
+levels = Array[ExtResource("5_bsumw")]([ExtResource("6_fwcvl"), ExtResource("7_na0o7"), ExtResource("8_73k8k"), ExtResource("9_5xyti"), ExtResource("10_n3o0a"), ExtResource("11_s758e"), ExtResource("15_n3o0a"), ExtResource("16_s758e"), ExtResource("17_q0sk7"), ExtResource("18_vapsy"), ExtResource("19_jofbb"), ExtResource("20_re7it")])
+goal_label = NodePath("../SymbolScreen/TitleBar/Label")
+guess_symbol = NodePath("../SymbolScreen/GuessSymbol")
+next_level_button = NodePath("../SymbolScreen/NextButton")
+symbol_button_container = NodePath("../SymbolScreen/SymbolButtonsBar/SymbolButtonContainer")
+end_message = ExtResource("21_vapsy")
+message_screen = NodePath("../MessageScreen")
+message_title = NodePath("../MessageScreen/MessageBox/TitleBar/MessageTitle")
+message_label = NodePath("../MessageScreen/MessageBox/MessageLabel")
+next_message_button = NodePath("../MessageScreen/NextButton")
