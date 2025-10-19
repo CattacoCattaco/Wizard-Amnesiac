@@ -1,10 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://cdly6i4lxnov2"]
+[gd_scene load_steps=17 format=3 uid="uid://cdly6i4lxnov2"]
 
-[ext_resource type="Script" uid="uid://fjxv86xw4ffq" path="res://main/symbol/GuessSymbol/guess_symbol.gd" id="1_xwkvk"]
+[ext_resource type="Script" uid="uid://fjxv86xw4ffq" path="res://main/symbol/guess_symbol/guess_symbol.gd" id="1_xwkvk"]
 [ext_resource type="Script" uid="uid://vuytrsscfx6d" path="res://main/symbol/symbol_data.gd" id="2_pjrb6"]
+[ext_resource type="Texture2D" uid="uid://bs0v88pf178dd" path="res://main/next_button/next.svg" id="3_73k8k"]
+[ext_resource type="Texture2D" uid="uid://bd1xpc5euajfc" path="res://main/next_button/next_pressed.svg" id="4_5xyti"]
 [ext_resource type="Script" uid="uid://w6sny2n4sql" path="res://main/levels/level_manager.gd" id="4_c651c"]
 [ext_resource type="Script" uid="uid://dd5sspu7y17ns" path="res://main/levels/level_data.gd" id="5_bsumw"]
+[ext_resource type="Texture2D" uid="uid://cj61sti46iw8f" path="res://main/next_button/next_highlighted.svg" id="5_n3o0a"]
 [ext_resource type="Resource" uid="uid://gks40bnw3adi" path="res://main/levels/data/hope.tres" id="6_fwcvl"]
+[ext_resource type="BitMap" uid="uid://bcy1vb5bmjduj" path="res://main/next_button/next_bitmap.png" id="6_s758e"]
 [ext_resource type="Resource" uid="uid://c7cji38qverkp" path="res://main/levels/data/stability.tres" id="7_na0o7"]
 [ext_resource type="Resource" uid="uid://c2sclnb4p3hua" path="res://main/levels/data/love.tres" id="8_73k8k"]
 [ext_resource type="Resource" uid="uid://yulasxeq6f80" path="res://main/levels/data/loss.tres" id="9_5xyti"]
@@ -78,10 +82,27 @@ grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 script = ExtResource("1_xwkvk")
-symbol_buttons = [NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath("")]
+symbol_buttons = [null, null, null, null, null, null]
 symbol = SubResource("Resource_pjrb6")
 bg_color = Color(1, 1, 1, 0.08235294)
 metadata/_custom_type_script = "uid://55r0wtsd6gs6"
+
+[node name="NextButton" type="TextureButton" parent="ColorRect3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.98
+anchor_top = 0.475
+anchor_right = 0.98
+anchor_bottom = 0.475
+offset_left = -40.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+texture_normal = ExtResource("3_73k8k")
+texture_pressed = ExtResource("4_5xyti")
+texture_hover = ExtResource("5_n3o0a")
+texture_click_mask = ExtResource("6_s758e")
 
 [node name="ColorRect" type="ColorRect" parent="ColorRect3"]
 custom_minimum_size = Vector2(0, 150)
@@ -107,9 +128,10 @@ grow_vertical = 2
 theme_override_constants/separation = 50
 alignment = 1
 
-[node name="LevelManager" type="Node" parent="." node_paths=PackedStringArray("goal_label", "guess_symbol", "symbol_button_container")]
+[node name="LevelManager" type="Node" parent="." node_paths=PackedStringArray("goal_label", "guess_symbol", "next_level_button", "symbol_button_container")]
 script = ExtResource("4_c651c")
 levels = Array[ExtResource("5_bsumw")]([ExtResource("6_fwcvl"), ExtResource("7_na0o7"), ExtResource("8_73k8k"), ExtResource("9_5xyti"), ExtResource("10_n3o0a"), ExtResource("11_s758e")])
 goal_label = NodePath("../ColorRect3/ColorRect2/Label")
 guess_symbol = NodePath("../ColorRect3/GuessSymbol")
+next_level_button = NodePath("../ColorRect3/NextButton")
 symbol_button_container = NodePath("../ColorRect3/ColorRect/SymbolButtonContainer")

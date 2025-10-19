@@ -6,6 +6,7 @@ extends Node
 
 @export var goal_label: Label
 @export var guess_symbol: GuessSymbol
+@export var next_level_button: TextureButton
 @export var symbol_button_container: HBoxContainer
 
 var symbol_buttons: Array[SymbolDisplay] = []
@@ -14,6 +15,12 @@ var symbol_buttons: Array[SymbolDisplay] = []
 func _ready() -> void:
 	load_level(current_level_index)
 	guess_symbol.symbol_added.connect(_check_guess)
+	next_level_button.pressed.connect(next_level)
+
+
+func next_level() -> void:
+	if current_level_index < len(levels) - 1:
+		load_level(current_level_index + 1)
 
 
 func load_level(index: int) -> void:
@@ -23,6 +30,7 @@ func load_level(index: int) -> void:
 	
 	goal_label.text = current_level.goal_name
 	guess_symbol.clear_symbols()
+	next_level_button.hide()
 	
 	for symbol_button in symbol_buttons:
 		symbol_button.queue_free()
@@ -62,5 +70,4 @@ func _check_guess(guess: Array[SymbolData]) -> void:
 func win() -> void:
 	print("You win!")
 	
-	if current_level_index < len(levels) - 1:
-		load_level(current_level_index + 1)
+	next_level_button.show()
