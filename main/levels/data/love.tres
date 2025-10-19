@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=6 format=3 uid="uid://c2sclnb4p3hua"]
+
+[ext_resource type="Script" uid="uid://vuytrsscfx6d" path="res://main/symbol/symbol_data.gd" id="1_rqkxu"]
+[ext_resource type="Resource" uid="uid://cuptikph1tnku" path="res://main/symbol/data/hope.tres" id="2_m3fke"]
+[ext_resource type="Resource" uid="uid://la8cvmhi0ev4" path="res://main/symbol/data/stability.tres" id="3_um37c"]
+[ext_resource type="Resource" uid="uid://d1ey1p1k4b4bu" path="res://main/symbol/data/love.tres" id="4_m3fke"]
+[ext_resource type="Script" uid="uid://dd5sspu7y17ns" path="res://main/levels/level_data.gd" id="4_x2twe"]
+
+[resource]
+script = ExtResource("4_x2twe")
+goal_name = "Love"
+goal = Array[ExtResource("1_rqkxu")]([ExtResource("4_m3fke")])
+given_symbols = Array[ExtResource("1_rqkxu")]([ExtResource("2_m3fke"), ExtResource("3_um37c"), ExtResource("4_m3fke")])
+metadata/_custom_type_script = "uid://dd5sspu7y17ns"

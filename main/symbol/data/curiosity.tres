@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="SymbolData" load_steps=2 format=3 uid="uid://cckjn80cl1h77"]
+
+[ext_resource type="Script" uid="uid://vuytrsscfx6d" path="res://main/symbol/symbol_data.gd" id="1_ayrmx"]
+
+[resource]
+script = ExtResource("1_ayrmx")
+symbol = 5
+metadata/_custom_type_script = "uid://vuytrsscfx6d"

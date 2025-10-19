@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=4 format=3 uid="uid://gks40bnw3adi"]
+
+[ext_resource type="Script" uid="uid://vuytrsscfx6d" path="res://main/symbol/symbol_data.gd" id="1_gpax3"]
+[ext_resource type="Script" uid="uid://dd5sspu7y17ns" path="res://main/levels/level_data.gd" id="1_l5u3j"]
+[ext_resource type="Resource" uid="uid://cuptikph1tnku" path="res://main/symbol/data/hope.tres" id="3_2gbbc"]
+
+[resource]
+script = ExtResource("1_l5u3j")
+goal_name = "Hope"
+goal = Array[ExtResource("1_gpax3")]([ExtResource("3_2gbbc")])
+given_symbols = Array[ExtResource("1_gpax3")]([ExtResource("3_2gbbc")])
+metadata/_custom_type_script = "uid://dd5sspu7y17ns"

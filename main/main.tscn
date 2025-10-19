@@ -1,8 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://cdly6i4lxnov2"]
+[gd_scene load_steps=13 format=3 uid="uid://cdly6i4lxnov2"]
 
-[ext_resource type="Script" uid="uid://55r0wtsd6gs6" path="res://main/symbol/symbol_display.gd" id="1_53q0u"]
 [ext_resource type="Script" uid="uid://fjxv86xw4ffq" path="res://main/symbol/GuessSymbol/guess_symbol.gd" id="1_xwkvk"]
 [ext_resource type="Script" uid="uid://vuytrsscfx6d" path="res://main/symbol/symbol_data.gd" id="2_pjrb6"]
+[ext_resource type="Script" uid="uid://w6sny2n4sql" path="res://main/levels/level_manager.gd" id="4_c651c"]
+[ext_resource type="Script" uid="uid://dd5sspu7y17ns" path="res://main/levels/level_data.gd" id="5_bsumw"]
+[ext_resource type="Resource" uid="uid://gks40bnw3adi" path="res://main/levels/data/hope.tres" id="6_fwcvl"]
+[ext_resource type="Resource" uid="uid://c7cji38qverkp" path="res://main/levels/data/stability.tres" id="7_na0o7"]
+[ext_resource type="Resource" uid="uid://c2sclnb4p3hua" path="res://main/levels/data/love.tres" id="8_73k8k"]
+[ext_resource type="Resource" uid="uid://yulasxeq6f80" path="res://main/levels/data/loss.tres" id="9_5xyti"]
+[ext_resource type="Resource" uid="uid://ckedu5iw4f7v1" path="res://main/levels/data/entropy.tres" id="10_n3o0a"]
+[ext_resource type="Resource" uid="uid://dumiaahn5n7re" path="res://main/levels/data/curiosity.tres" id="11_s758e"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_pjrb6"]
 font_size = 48
@@ -12,35 +19,6 @@ outline_color = Color(0, 0, 0, 1)
 [sub_resource type="Resource" id="Resource_pjrb6"]
 script = ExtResource("2_pjrb6")
 symbol = 6
-metadata/_custom_type_script = "uid://vuytrsscfx6d"
-
-[sub_resource type="Resource" id="Resource_3wy1v"]
-script = ExtResource("2_pjrb6")
-metadata/_custom_type_script = "uid://vuytrsscfx6d"
-
-[sub_resource type="Resource" id="Resource_kfbq2"]
-script = ExtResource("2_pjrb6")
-symbol = 1
-metadata/_custom_type_script = "uid://vuytrsscfx6d"
-
-[sub_resource type="Resource" id="Resource_4dugh"]
-script = ExtResource("2_pjrb6")
-symbol = 2
-metadata/_custom_type_script = "uid://vuytrsscfx6d"
-
-[sub_resource type="Resource" id="Resource_67ri8"]
-script = ExtResource("2_pjrb6")
-symbol = 3
-metadata/_custom_type_script = "uid://vuytrsscfx6d"
-
-[sub_resource type="Resource" id="Resource_grrlh"]
-script = ExtResource("2_pjrb6")
-symbol = 4
-metadata/_custom_type_script = "uid://vuytrsscfx6d"
-
-[sub_resource type="Resource" id="Resource_0i4oc"]
-script = ExtResource("2_pjrb6")
-symbol = 5
 metadata/_custom_type_script = "uid://vuytrsscfx6d"
 
 [node name="Main" type="Control"]
@@ -100,7 +78,7 @@ grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 script = ExtResource("1_xwkvk")
-symbol_buttons = [NodePath("../ColorRect/HBoxContainer/HopeButton"), NodePath("../ColorRect/HBoxContainer/StabilityButton"), NodePath("../ColorRect/HBoxContainer/LoveButton"), NodePath("../ColorRect/HBoxContainer/LossButton"), NodePath("../ColorRect/HBoxContainer/EntropyButton"), NodePath("../ColorRect/HBoxContainer/CuriosityButton")]
+symbol_buttons = [NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath("")]
 symbol = SubResource("Resource_pjrb6")
 bg_color = Color(1, 1, 1, 0.08235294)
 metadata/_custom_type_script = "uid://55r0wtsd6gs6"
@@ -117,77 +95,21 @@ grow_horizontal = 2
 grow_vertical = 0
 color = Color(0.511, 0.73, 0.73, 1)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect3/ColorRect"]
+[node name="SymbolButtonContainer" type="HBoxContainer" parent="ColorRect3/ColorRect"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -383.0
-offset_top = -50.0
-offset_right = 383.0
-offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 50
+alignment = 1
 
-[node name="HopeButton" type="Control" parent="ColorRect3/ColorRect/HBoxContainer"]
-layout_mode = 2
-script = ExtResource("1_53q0u")
-symbol = SubResource("Resource_3wy1v")
-bg_color = Color(1, 1, 1, 0.19607843)
-is_button = true
-hover_color = Color(0.5882353, 0.5882353, 0.5882353, 0.19607843)
-pressed_color = Color(0, 0, 0, 0.19607843)
-metadata/_custom_type_script = "uid://55r0wtsd6gs6"
-
-[node name="StabilityButton" type="Control" parent="ColorRect3/ColorRect/HBoxContainer"]
-layout_mode = 2
-script = ExtResource("1_53q0u")
-symbol = SubResource("Resource_kfbq2")
-bg_color = Color(1, 1, 1, 0.19607843)
-is_button = true
-hover_color = Color(0.5882353, 0.5882353, 0.5882353, 0.19607843)
-pressed_color = Color(0, 0, 0, 0.19607843)
-metadata/_custom_type_script = "uid://55r0wtsd6gs6"
-
-[node name="LoveButton" type="Control" parent="ColorRect3/ColorRect/HBoxContainer"]
-layout_mode = 2
-script = ExtResource("1_53q0u")
-symbol = SubResource("Resource_4dugh")
-bg_color = Color(1, 1, 1, 0.19607843)
-is_button = true
-hover_color = Color(0.5882353, 0.5882353, 0.5882353, 0.19607843)
-pressed_color = Color(0, 0, 0, 0.19607843)
-metadata/_custom_type_script = "uid://55r0wtsd6gs6"
-
-[node name="LossButton" type="Control" parent="ColorRect3/ColorRect/HBoxContainer"]
-layout_mode = 2
-script = ExtResource("1_53q0u")
-symbol = SubResource("Resource_67ri8")
-bg_color = Color(1, 1, 1, 0.19607843)
-is_button = true
-hover_color = Color(0.5882353, 0.5882353, 0.5882353, 0.19607843)
-pressed_color = Color(0, 0, 0, 0.19607843)
-metadata/_custom_type_script = "uid://55r0wtsd6gs6"
-
-[node name="EntropyButton" type="Control" parent="ColorRect3/ColorRect/HBoxContainer"]
-layout_mode = 2
-script = ExtResource("1_53q0u")
-symbol = SubResource("Resource_grrlh")
-bg_color = Color(1, 1, 1, 0.19607843)
-is_button = true
-hover_color = Color(0.5882353, 0.5882353, 0.5882353, 0.19607843)
-pressed_color = Color(0, 0, 0, 0.19607843)
-metadata/_custom_type_script = "uid://55r0wtsd6gs6"
-
-[node name="CuriosityButton" type="Control" parent="ColorRect3/ColorRect/HBoxContainer"]
-layout_mode = 2
-script = ExtResource("1_53q0u")
-symbol = SubResource("Resource_0i4oc")
-bg_color = Color(1, 1, 1, 0.19607843)
-is_button = true
-hover_color = Color(0.5882353, 0.5882353, 0.5882353, 0.19607843)
-pressed_color = Color(0, 0, 0, 0.19607843)
-metadata/_custom_type_script = "uid://55r0wtsd6gs6"
+[node name="LevelManager" type="Node" parent="." node_paths=PackedStringArray("goal_label", "guess_symbol", "symbol_button_container")]
+script = ExtResource("4_c651c")
+levels = Array[ExtResource("5_bsumw")]([ExtResource("6_fwcvl"), ExtResource("7_na0o7"), ExtResource("8_73k8k"), ExtResource("9_5xyti"), ExtResource("10_n3o0a"), ExtResource("11_s758e")])
+goal_label = NodePath("../ColorRect3/ColorRect2/Label")
+guess_symbol = NodePath("../ColorRect3/GuessSymbol")
+symbol_button_container = NodePath("../ColorRect3/ColorRect/SymbolButtonContainer")

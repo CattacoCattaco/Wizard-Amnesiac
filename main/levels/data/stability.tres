@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=5 format=3 uid="uid://c7cji38qverkp"]
+
+[ext_resource type="Script" uid="uid://vuytrsscfx6d" path="res://main/symbol/symbol_data.gd" id="1_d55ro"]
+[ext_resource type="Resource" uid="uid://cuptikph1tnku" path="res://main/symbol/data/hope.tres" id="2_y50yh"]
+[ext_resource type="Script" uid="uid://dd5sspu7y17ns" path="res://main/levels/level_data.gd" id="3_kyl0d"]
+[ext_resource type="Resource" uid="uid://la8cvmhi0ev4" path="res://main/symbol/data/stability.tres" id="3_y50yh"]
+
+[resource]
+script = ExtResource("3_kyl0d")
+goal_name = "Stability"
+goal = Array[ExtResource("1_d55ro")]([ExtResource("3_y50yh")])
+given_symbols = Array[ExtResource("1_d55ro")]([ExtResource("2_y50yh"), ExtResource("3_y50yh")])
+metadata/_custom_type_script = "uid://dd5sspu7y17ns"

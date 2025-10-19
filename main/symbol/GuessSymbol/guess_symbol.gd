@@ -2,14 +2,9 @@
 class_name GuessSymbol
 extends SymbolDisplay
 
+signal symbol_added(symbols: Array[SymbolData])
+
 @export var symbol_buttons: Array[SymbolDisplay]
-
-
-func _ready() -> void:
-	for symbol_button: SymbolDisplay in symbol_buttons:
-		symbol_button.pressed.connect(add_symbol.bind(symbol_button.symbol))
-	
-	super()
 
 
 func _input(event: InputEvent) -> void:
@@ -29,6 +24,8 @@ func add_symbol(new_symbol: SymbolData) -> void:
 	
 	symbol.child_symbols.append(new_symbol)
 	update = true
+	
+	symbol_added.emit(symbol.child_symbols)
 
 
 func remove_symbol() -> void:

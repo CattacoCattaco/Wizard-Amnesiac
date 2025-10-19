@@ -37,8 +37,23 @@ func get_width() -> float:
 			
 			return width
 		SymbolType.STABILITY:
-			return 2/3.0 if is_square() else 1.0
+			return 2 / 3.0 if is_square() else 1.0
 		SymbolType.CURIOSITY:
-			return 1/2.0 if is_square() else 1.0
+			return 1 / 2.0 if is_square() else 1.0
 		_:
 			return 1.0
+
+
+func matches(other: SymbolData) -> bool:
+	if other.symbol != symbol:
+		return false
+	
+	if symbol == SymbolType.MULTISYMBOL:
+		if len(child_symbols) != len(other.child_symbols):
+			return false
+		
+		for i in len(child_symbols):
+			if not other.child_symbols[i].matches(child_symbols[i]):
+				return false
+	
+	return true

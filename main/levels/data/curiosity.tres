@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=9 format=3 uid="uid://dumiaahn5n7re"]
+
+[ext_resource type="Script" uid="uid://vuytrsscfx6d" path="res://main/symbol/symbol_data.gd" id="1_isdno"]
+[ext_resource type="Resource" uid="uid://cuptikph1tnku" path="res://main/symbol/data/hope.tres" id="2_ku80n"]
+[ext_resource type="Resource" uid="uid://la8cvmhi0ev4" path="res://main/symbol/data/stability.tres" id="3_b2ace"]
+[ext_resource type="Resource" uid="uid://d1ey1p1k4b4bu" path="res://main/symbol/data/love.tres" id="4_xf68i"]
+[ext_resource type="Resource" uid="uid://ybygjait4n1p" path="res://main/symbol/data/loss.tres" id="5_6hsxm"]
+[ext_resource type="Resource" uid="uid://d3fncp45pke3a" path="res://main/symbol/data/entropy.tres" id="6_50oro"]
+[ext_resource type="Script" uid="uid://dd5sspu7y17ns" path="res://main/levels/level_data.gd" id="7_847mu"]
+[ext_resource type="Resource" uid="uid://cckjn80cl1h77" path="res://main/symbol/data/curiosity.tres" id="7_ku80n"]
+
+[resource]
+script = ExtResource("7_847mu")
+goal_name = "Curiosity"
+goal = Array[ExtResource("1_isdno")]([ExtResource("7_ku80n")])
+given_symbols = Array[ExtResource("1_isdno")]([ExtResource("2_ku80n"), ExtResource("3_b2ace"), ExtResource("4_xf68i"), ExtResource("5_6hsxm"), ExtResource("6_50oro"), ExtResource("7_ku80n")])
+metadata/_custom_type_script = "uid://dd5sspu7y17ns"
